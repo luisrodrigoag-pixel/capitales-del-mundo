@@ -1,0 +1,1034 @@
+<title>Capitales del Mundo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Spectral:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Lamina de atlas: una sola columna angosta, barra de instrumentos arriba,
+   retícula de meridianos solo en la portada. Tinta fría sobre papel frío. */
+:root {
+  --papel: #eef1f3;
+  --hoja: #ffffff;
+  --tinta: #141f26;
+  --tenue: #5a6b75;
+  --linea: #d3dade;
+  --agua: #1a6b86;      /* acento: azul de carta náutica */
+  --tierra: #2b7d5c;    /* acierto */
+  --coral: #ab4027;     /* error */
+  --oro: #8a6a1f;       /* notas al pie */
+  --f-titulo: "Bricolage Grotesque", "Helvetica Neue", Helvetica, sans-serif;
+  --f-texto: "Spectral", Georgia, "Times New Roman", serif;
+  --f-dato: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --f-bandera: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --papel: #0e1518; --hoja: #162026; --tinta: #e7eef1; --tenue: #93a4ad;
+    --linea: #253439; --agua: #5bbfd6; --tierra: #5cbd8d; --coral: #e37f66;
+    --oro: #d5b45e; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --papel: #0e1518; --hoja: #162026; --tinta: #e7eef1; --tenue: #93a4ad;
+  --linea: #253439; --agua: #5bbfd6; --tierra: #5cbd8d; --coral: #e37f66;
+  --oro: #d5b45e; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--papel); color: var(--tinta);
+  font-family: var(--f-texto); font-size: 1rem; line-height: 1.55;
+  -webkit-text-size-adjust: 100%;
+}
+.marco {
+  max-width: 44rem; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 3rem;
+}
+h1, h2, h3 { font-family: var(--f-titulo); margin: 0; text-wrap: balance; line-height: 1.12; }
+p { margin: 0; }
+button { font: inherit; color: inherit; cursor: pointer; }
+.oculto { display: none !important; }
+
+/* ---------- barra de instrumentos ---------- */
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--papel);
+}
+.instrumentos {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9;
+  background: var(--papel); border-bottom: 1px solid var(--linea);
+  padding-block: .6rem .5rem; margin-bottom: 1.25rem;
+}
+.instrumentos .fila {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: .75rem; font-family: var(--f-dato); font-size: .76rem;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--tenue);
+}
+.instrumentos b { color: var(--tinta); font-weight: 600; font-variant-numeric: tabular-nums; }
+.riel { height: 3px; background: var(--linea); margin-top: .5rem; overflow: hidden; }
+.riel span { display: block; height: 100%; width: 0; background: var(--agua); transition: width .25s ease; }
+
+/* ---------- pestañas ---------- */
+.pestanas { display: flex; gap: .4rem; flex-wrap: wrap; padding-block: 1.1rem .25rem; }
+.pestanas button {
+  background: none; border: 1px solid var(--linea); border-radius: 2px;
+  padding: .35rem .7rem; font-family: var(--f-dato); font-size: .74rem;
+  letter-spacing: .07em; text-transform: uppercase; color: var(--tenue);
+}
+.pestanas button[aria-current="true"] { background: var(--tinta); color: var(--papel); border-color: var(--tinta); }
+
+/* ---------- portada ---------- */
+.portada {
+  position: relative; overflow: hidden; border: 1px solid var(--linea);
+  background: var(--hoja); padding: 2rem 1.4rem 1.6rem; margin-top: .6rem;
+}
+.portada::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+  background:
+    repeating-linear-gradient(to right, var(--linea) 0 1px, transparent 1px 3.2rem),
+    repeating-linear-gradient(to bottom, var(--linea) 0 1px, transparent 1px 3.2rem);
+  mask-image: radial-gradient(ellipse at 78% 18%, #000 0%, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse at 78% 18%, #000 0%, transparent 72%);
+}
+.portada > * { position: relative; }
+.rotulo {
+  font-family: var(--f-dato); font-size: .72rem; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--agua); margin-bottom: .6rem;
+}
+.portada h1 { font-size: clamp(2.1rem, 9vw, 3.4rem); font-weight: 800; letter-spacing: -.02em; }
+.portada .lema { font-style: italic; color: var(--tenue); margin-top: .7rem; max-width: 32rem; }
+.cifras { display: flex; gap: 1.6rem; flex-wrap: wrap; margin-top: 1.3rem;
+  font-family: var(--f-dato); font-size: .78rem; color: var(--tenue); }
+.cifras b { display: block; font-size: 1.5rem; color: var(--tinta); font-variant-numeric: tabular-nums; }
+
+/* ---------- formulario de examen ---------- */
+fieldset { border: 0; padding: 0; margin: 1.6rem 0 0; }
+legend {
+  font-family: var(--f-dato); font-size: .72rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--tenue); padding: 0 0 .55rem;
+}
+.opciones { display: flex; gap: .4rem; flex-wrap: wrap; }
+.opciones button {
+  background: var(--hoja); border: 1px solid var(--linea); border-radius: 2px;
+  padding: .45rem .8rem; font-size: .92rem;
+}
+.opciones button[aria-pressed="true"] {
+  border-color: var(--agua); background: color-mix(in srgb, var(--agua) 12%, var(--hoja));
+  color: var(--tinta); box-shadow: inset 0 0 0 1px var(--agua);
+}
+.acciones { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1.9rem; align-items: center; }
+.btn {
+  background: var(--tinta); color: var(--papel); border: 1px solid var(--tinta);
+  border-radius: 2px; padding: .7rem 1.4rem; font-family: var(--f-titulo);
+  font-weight: 600; font-size: 1rem; letter-spacing: .01em;
+}
+.btn.sec { background: none; color: var(--tinta); border-color: var(--linea); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.nota-pie {
+  font-size: .85rem; color: var(--tenue); margin-top: 1.4rem;
+  border-top: 1px solid var(--linea); padding-top: .9rem;
+}
+
+/* ---------- reactivo ---------- */
+.reactivo { background: var(--hoja); border: 1px solid var(--linea); padding: 1.5rem 1.2rem; }
+.enunciado {
+  font-family: var(--f-dato); font-size: .74rem; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--tenue);
+}
+.bandera {
+  font-family: var(--f-bandera); font-size: clamp(4.5rem, 24vw, 7.5rem);
+  line-height: 1.1; display: block; margin: .4rem 0 .2rem; text-align: center;
+}
+.sinbandera { font-size: .8rem; color: var(--tenue); text-align: center; font-family: var(--f-dato); }
+.sujeto {
+  font-family: var(--f-titulo); font-weight: 800; letter-spacing: -.015em;
+  font-size: clamp(1.8rem, 7.5vw, 2.9rem); margin: .45rem 0 .1rem; text-wrap: balance;
+}
+.respuestas { display: grid; gap: .55rem; margin-top: 1.3rem; }
+@media (min-width: 34rem) { .respuestas { grid-template-columns: 1fr 1fr; } }
+.respuestas button {
+  display: flex; align-items: center; gap: .65rem; text-align: left; min-width: 0;
+  background: var(--hoja); border: 1px solid var(--linea); border-radius: 2px;
+  padding: .75rem .85rem; font-size: 1rem; line-height: 1.3;
+}
+.respuestas button:hover:not(:disabled) { border-color: var(--agua); }
+.respuestas .tecla {
+  flex: none; width: 1.5rem; height: 1.5rem; display: grid; place-items: center;
+  border: 1px solid var(--linea); font-family: var(--f-dato); font-size: .72rem; color: var(--tenue);
+}
+.respuestas button.bien { border-color: var(--tierra); background: color-mix(in srgb, var(--tierra) 13%, var(--hoja)); }
+.respuestas button.bien .tecla { border-color: var(--tierra); color: var(--tierra); }
+.respuestas button.mal { border-color: var(--coral); background: color-mix(in srgb, var(--coral) 13%, var(--hoja)); }
+.respuestas button.mal .tecla { border-color: var(--coral); color: var(--coral); }
+.respuestas button:disabled { cursor: default; }
+.escribir { display: flex; gap: .5rem; margin-top: 1.3rem; flex-wrap: wrap; }
+.escribir input {
+  flex: 1 1 12rem; min-width: 0; font: inherit; color: var(--tinta);
+  background: var(--hoja); border: 1px solid var(--linea); border-radius: 2px; padding: .7rem .8rem;
+}
+.escribir input:focus-visible { outline: 2px solid var(--agua); outline-offset: 1px; }
+.veredicto { margin-top: 1.1rem; font-family: var(--f-titulo); font-weight: 600; }
+.veredicto.bien { color: var(--tierra); }
+.veredicto.mal { color: var(--coral); }
+.apunte {
+  margin-top: .55rem; font-size: .9rem; color: var(--tenue);
+  border-left: 2px solid var(--oro); padding-left: .7rem;
+}
+
+/* ---------- boleta ---------- */
+.boleta { background: var(--hoja); border: 1px solid var(--linea); padding: 1.6rem 1.2rem; }
+.calificacion {
+  font-family: var(--f-dato); font-size: clamp(3rem, 15vw, 4.6rem); font-weight: 600;
+  line-height: 1; font-variant-numeric: tabular-nums;
+}
+.desglose { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 1rem;
+  font-family: var(--f-dato); font-size: .78rem; color: var(--tenue); }
+.desglose b { display: block; font-size: 1.15rem; color: var(--tinta); font-variant-numeric: tabular-nums; }
+.lista-errores { list-style: none; padding: 0; margin: 1.5rem 0 0; display: grid; gap: .5rem; }
+.lista-errores li {
+  display: flex; gap: .7rem; align-items: baseline; border-top: 1px solid var(--linea);
+  padding-top: .5rem; font-size: .95rem; min-width: 0;
+}
+.lista-errores .bnd { font-family: var(--f-bandera); font-size: 1.2rem; flex: none; }
+.lista-errores .tuya { color: var(--coral); font-size: .85rem; }
+
+/* ---------- estudio ---------- */
+.buscador {
+  width: 100%; font: inherit; color: var(--tinta); background: var(--hoja);
+  border: 1px solid var(--linea); border-radius: 2px; padding: .7rem .8rem; margin-top: 1rem;
+}
+.buscador:focus-visible { outline: 2px solid var(--agua); outline-offset: 1px; }
+.tabla { margin-top: 1rem; border-top: 1px solid var(--linea); }
+.tabla .reg {
+  display: grid; grid-template-columns: 2rem 1fr; gap: .2rem .7rem;
+  border-bottom: 1px solid var(--linea); padding: .6rem 0; min-width: 0;
+}
+.tabla .bnd { font-family: var(--f-bandera); font-size: 1.35rem; grid-row: 1 / span 2; }
+.tabla .pais { font-family: var(--f-titulo); font-weight: 600; }
+.tabla .cap { color: var(--tenue); font-size: .9rem; }
+.tabla .cap span { font-family: var(--f-dato); font-size: .68rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--agua); margin-right: .4rem; }
+.tabla .reg .apunte { grid-column: 2; margin-top: .3rem; font-size: .82rem; }
+
+/* ---------- progreso ---------- */
+.medidores { display: grid; gap: .8rem; margin-top: 1.2rem; }
+.medidor { display: grid; grid-template-columns: 1fr auto; gap: .2rem .8rem; }
+.medidor .nom { font-family: var(--f-titulo); font-weight: 600; font-size: .95rem; }
+.medidor .pct { font-family: var(--f-dato); font-size: .85rem; color: var(--tenue); font-variant-numeric: tabular-nums; }
+.medidor .barra { grid-column: 1 / -1; height: 6px; background: var(--linea); }
+.medidor .barra i { display: block; height: 100%; background: var(--tierra); }
+.vacio { color: var(--tenue); font-style: italic; margin-top: 1rem; }
+:focus-visible { outline: 2px solid var(--agua); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="marco">
+  <div class="instrumentos oculto" id="instrumentos">
+    <div class="fila">
+      <span id="marcador-pos">Reactivo <b>1</b> de <b>20</b></span>
+      <span id="marcador-aciertos">Aciertos <b>0</b></span>
+      <span id="marcador-reloj"><b>0:00</b></span>
+    </div>
+    <div class="riel"><span id="riel"></span></div>
+  </div>
+
+  <nav class="pestanas" id="pestanas" aria-label="Secciones">
+    <button type="button" data-ir="inicio" aria-current="true">Examen</button>
+    <button type="button" data-ir="estudio">Estudiar</button>
+    <button type="button" data-ir="progreso">Mi progreso</button>
+  </nav>
+
+  <!-- ================= INICIO ================= -->
+  <section id="p-inicio">
+    <div class="portada">
+      <p class="rotulo">195 países · 5 continentes</p>
+      <h1>Capitales del Mundo</h1>
+      <p class="lema">Banderas, países y capitales. Eliges el modo y el continente, la app
+        te califica y te deja repasar exactamente lo que fallaste.</p>
+      <div class="cifras">
+        <div><b id="c-paises">195</b>países</div>
+        <div><b id="c-dominados">0</b>dominados</div>
+        <div><b id="c-fallos">0</b>por repasar</div>
+      </div>
+    </div>
+
+    <fieldset>
+      <legend>Modo</legend>
+      <div class="opciones" id="op-modo"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Alcance</legend>
+      <div class="opciones" id="op-ambito"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Reactivos</legend>
+      <div class="opciones" id="op-cantidad"></div>
+    </fieldset>
+
+    <div class="acciones">
+      <button type="button" class="btn" id="btn-examen">Empezar examen</button>
+      <button type="button" class="btn sec" id="btn-practica">Práctica libre</button>
+      <button type="button" class="btn sec oculto" id="btn-fallos">Repasar mis fallos</button>
+    </div>
+    <p class="nota-pie" id="pie-inicio"></p>
+  </section>
+
+  <!-- ================= JUEGO ================= -->
+  <section id="p-juego" class="oculto">
+    <div class="reactivo">
+      <p class="enunciado" id="enunciado"></p>
+      <div id="sujeto-zona"></div>
+      <div class="respuestas" id="respuestas"></div>
+      <form class="escribir oculto" id="forma-escribir" autocomplete="off">
+        <input type="text" id="campo" placeholder="Escribe la capital" aria-label="Tu respuesta"
+               autocapitalize="words" spellcheck="false">
+        <button type="submit" class="btn">Responder</button>
+      </form>
+      <p class="veredicto oculto" id="veredicto"></p>
+      <p class="apunte oculto" id="apunte"></p>
+    </div>
+    <div class="acciones">
+      <button type="button" class="btn oculto" id="btn-siguiente">Siguiente</button>
+      <button type="button" class="btn sec" id="btn-salir">Salir</button>
+    </div>
+  </section>
+
+  <!-- ================= BOLETA ================= -->
+  <section id="p-final" class="oculto">
+    <div class="boleta">
+      <p class="rotulo" id="final-rotulo">Resultado</p>
+      <p class="calificacion" id="final-calif">—</p>
+      <div class="desglose">
+        <div><b id="final-aciertos">0</b>aciertos</div>
+        <div><b id="final-errores">0</b>errores</div>
+        <div><b id="final-tiempo">0:00</b>tiempo</div>
+        <div><b id="final-ritmo">0 s</b>por reactivo</div>
+      </div>
+      <h3 id="titulo-errores" style="margin-top:1.6rem;font-size:1rem">Lo que falta afinar</h3>
+      <ul class="lista-errores" id="final-errores-lista"></ul>
+    </div>
+    <div class="acciones">
+      <button type="button" class="btn" id="btn-repetir-fallos">Repasar estos errores</button>
+      <button type="button" class="btn sec" id="btn-otro">Otro examen</button>
+    </div>
+  </section>
+
+  <!-- ================= ESTUDIO ================= -->
+  <section id="p-estudio" class="oculto">
+    <h2 style="font-size:1.4rem;margin-top:.6rem">Los 195, de corrido</h2>
+    <p style="color:var(--tenue);margin-top:.4rem">Busca por país, capital o continente.</p>
+    <input type="search" class="buscador" id="busca" placeholder="Nauru, Dodoma, Oceanía…" aria-label="Buscar">
+    <p class="rotulo" id="cuenta-estudio" style="margin-top:.9rem"></p>
+    <div class="tabla" id="tabla"></div>
+  </section>
+
+  <!-- ================= PROGRESO ================= -->
+  <section id="p-progreso" class="oculto">
+    <h2 style="font-size:1.4rem;margin-top:.6rem">Mi progreso</h2>
+    <p style="color:var(--tenue);margin-top:.4rem">Un país cuenta como dominado con dos aciertos
+      seguidos y ningún error reciente. Se guarda en este navegador.</p>
+    <div class="medidores" id="medidores"></div>
+    <h3 style="margin-top:1.8rem;font-size:1rem">Mis diez peores</h3>
+    <ul class="lista-errores" id="peores"></ul>
+    <div class="acciones">
+      <button type="button" class="btn sec" id="btn-borrar">Borrar mi progreso</button>
+    </div>
+  </section>
+</div>
+
+<script>
+const DATOS = [
+["AF", "Afganistán", "Kabul", "Asia", "Asia del sur", [], [], ""],
+["AL", "Albania", "Tirana", "Europa", "Europa del sureste", [], [], ""],
+["DE", "Alemania", "Berlín", "Europa", "Europa occidental", [], [], ""],
+["AD", "Andorra", "Andorra la Vieja", "Europa", "Europa del sur", [], [], ""],
+["AO", "Angola", "Luanda", "África", "África central", [], [], ""],
+["AG", "Antigua y Barbuda", "Saint John's", "América", "Caribe", [], ["Saint John"], ""],
+["SA", "Arabia Saudí", "Riad", "Asia", "Asia occidental", [], [], ""],
+["DZ", "Argelia", "Argel", "África", "Norte de África", [], [], ""],
+["AR", "Argentina", "Buenos Aires", "América", "Sudamérica", [], [], ""],
+["AM", "Armenia", "Ereván", "Asia", "Asia occidental", [], [], ""],
+["AU", "Australia", "Canberra", "Oceanía", "Australia y Nueva Zelanda", [], [], ""],
+["AT", "Austria", "Viena", "Europa", "Europa central", [], [], ""],
+["AZ", "Azerbaiyán", "Bakú", "Asia", "Asia occidental", [], [], ""],
+["BS", "Bahamas", "Nasáu", "América", "Caribe", [], [], ""],
+["BD", "Bangladés", "Daca", "Asia", "Asia del sur", [], [], ""],
+["BB", "Barbados", "Bridgetown", "América", "Caribe", [], [], ""],
+["BH", "Baréin", "Manama", "Asia", "Asia occidental", [], [], ""],
+["BZ", "Belice", "Belmopán", "América", "Centroamérica", [], [], ""],
+["BJ", "Benín", "Porto Novo", "África", "África occidental", [], ["Cotonú"], "Porto Novo es la capital oficial; Cotonú es la sede del gobierno."],
+["BY", "Bielorrusia", "Minsk", "Europa", "Europa del este", [], [], ""],
+["MM", "Birmania", "Naipyidó", "Asia", "Sudeste asiático", ["Myanmar"], ["Naypyidaw", "Nay Pyi Taw"], "Naipyidó es la capital desde 2005; Rangún fue la anterior."],
+["BO", "Bolivia", "Sucre", "América", "Sudamérica", [], ["La Paz"], "Sucre es la capital constitucional; La Paz es la sede del gobierno."],
+["BA", "Bosnia y Herzegovina", "Sarajevo", "Europa", "Europa del sureste", [], [], ""],
+["BW", "Botsuana", "Gaborone", "África", "África austral", [], [], ""],
+["BR", "Brasil", "Brasilia", "América", "Sudamérica", [], [], ""],
+["BN", "Brunéi", "Bandar Seri Begawan", "Asia", "Sudeste asiático", [], [], ""],
+["BG", "Bulgaria", "Sofía", "Europa", "Europa del sureste", [], [], ""],
+["BF", "Burkina Faso", "Uagadugú", "África", "África occidental", [], [], ""],
+["BI", "Burundi", "Guitega", "África", "África oriental", [], [], ""],
+["BT", "Bután", "Timbu", "Asia", "Asia del sur", [], [], ""],
+["BE", "Bélgica", "Bruselas", "Europa", "Europa occidental", [], [], ""],
+["CV", "Cabo Verde", "Praia", "África", "África occidental", [], [], ""],
+["KH", "Camboya", "Nom Pen", "Asia", "Sudeste asiático", [], [], ""],
+["CM", "Camerún", "Yaundé", "África", "África central", [], [], ""],
+["CA", "Canadá", "Ottawa", "América", "Norteamérica", [], [], ""],
+["QA", "Catar", "Doha", "Asia", "Asia occidental", [], [], ""],
+["TD", "Chad", "Yamena", "África", "África central", [], [], ""],
+["CL", "Chile", "Santiago de Chile", "América", "Sudamérica", [], ["Santiago"], ""],
+["CN", "China", "Pekín", "Asia", "Asia oriental", ["República Popular China"], ["Beijing"], ""],
+["CY", "Chipre", "Nicosia", "Europa", "Europa del sur", [], [], ""],
+["VA", "Ciudad del Vaticano", "Ciudad del Vaticano", "Europa", "Europa del sur", ["Vaticano", "Santa Sede"], [], ""],
+["CO", "Colombia", "Bogotá", "América", "Sudamérica", [], [], ""],
+["KM", "Comoras", "Moroni", "África", "África oriental", [], [], ""],
+["KP", "Corea del Norte", "Pionyang", "Asia", "Asia oriental", [], [], ""],
+["KR", "Corea del Sur", "Seúl", "Asia", "Asia oriental", [], [], ""],
+["CR", "Costa Rica", "San José", "América", "Centroamérica", [], [], ""],
+["CI", "Costa de Marfil", "Yamusukro", "África", "África occidental", [], ["Abiyán"], "Yamusukro es la capital oficial; Abiyán es la sede del gobierno."],
+["HR", "Croacia", "Zagreb", "Europa", "Europa del sureste", [], [], ""],
+["CU", "Cuba", "La Habana", "América", "Caribe", [], [], ""],
+["DK", "Dinamarca", "Copenhague", "Europa", "Europa del norte", [], [], ""],
+["DM", "Dominica", "Roseau", "América", "Caribe", [], [], ""],
+["EC", "Ecuador", "Quito", "América", "Sudamérica", [], [], ""],
+["EG", "Egipto", "El Cairo", "África", "Norte de África", [], [], ""],
+["SV", "El Salvador", "San Salvador", "América", "Centroamérica", [], [], ""],
+["AE", "Emiratos Árabes Unidos", "Abu Dhabi", "Asia", "Asia occidental", ["EAU"], [], ""],
+["ER", "Eritrea", "Asmara", "África", "África oriental", [], [], ""],
+["SK", "Eslovaquia", "Bratislava", "Europa", "Europa central", [], [], ""],
+["SI", "Eslovenia", "Liubliana", "Europa", "Europa central", [], [], ""],
+["ES", "España", "Madrid", "Europa", "Europa del sur", [], [], ""],
+["US", "Estados Unidos", "Washington D. C.", "América", "Norteamérica", ["EUA", "EEUU", "Estados Unidos de América"], ["Washington"], ""],
+["EE", "Estonia", "Tallin", "Europa", "Europa del norte", [], [], ""],
+["SZ", "Esuatini", "Mbabane", "África", "África austral", ["Suazilandia"], ["Lobamba"], "Mbabane es la capital administrativa; Lobamba es la real y legislativa. El país se llama Esuatini desde 2018."],
+["ET", "Etiopía", "Adís Abeba", "África", "África oriental", [], [], ""],
+["PH", "Filipinas", "Manila", "Asia", "Sudeste asiático", [], [], ""],
+["FI", "Finlandia", "Helsinki", "Europa", "Europa del norte", [], [], ""],
+["FJ", "Fiyi", "Suva", "Oceanía", "Melanesia", [], [], ""],
+["FR", "Francia", "París", "Europa", "Europa occidental", [], [], ""],
+["GA", "Gabón", "Libreville", "África", "África central", [], [], ""],
+["GM", "Gambia", "Banjul", "África", "África occidental", [], [], ""],
+["GE", "Georgia", "Tiflis", "Asia", "Asia occidental", [], [], ""],
+["GH", "Ghana", "Acra", "África", "África occidental", [], [], ""],
+["GD", "Granada", "Saint George's", "América", "Caribe", [], ["Saint George"], ""],
+["GR", "Grecia", "Atenas", "Europa", "Europa del sur", [], [], ""],
+["GT", "Guatemala", "Ciudad de Guatemala", "América", "Centroamérica", [], [], ""],
+["GN", "Guinea", "Conakri", "África", "África occidental", [], [], ""],
+["GQ", "Guinea Ecuatorial", "Malabo", "África", "África central", [], ["Ciudad de la Paz", "Djibloho", "Oyala"], "Malabo sigue siendo la capital de hecho; desde 2017 el gobierno designó Ciudad de la Paz (Djibloho) como nueva capital."],
+["GW", "Guinea-Bisáu", "Bisáu", "África", "África occidental", [], [], ""],
+["GY", "Guyana", "Georgetown", "América", "Sudamérica", [], [], ""],
+["HT", "Haití", "Puerto Príncipe", "América", "Caribe", [], [], ""],
+["HN", "Honduras", "Tegucigalpa", "América", "Centroamérica", [], [], ""],
+["HU", "Hungría", "Budapest", "Europa", "Europa central", [], [], ""],
+["IN", "India", "Nueva Delhi", "Asia", "Asia del sur", [], ["Delhi"], ""],
+["ID", "Indonesia", "Yakarta", "Asia", "Sudeste asiático", [], [], ""],
+["IQ", "Irak", "Bagdad", "Asia", "Asia occidental", [], [], ""],
+["IE", "Irlanda", "Dublín", "Europa", "Europa del norte", [], [], ""],
+["IR", "Irán", "Teherán", "Asia", "Asia del sur", [], [], ""],
+["IS", "Islandia", "Reikiavik", "Europa", "Europa del norte", [], [], ""],
+["MH", "Islas Marshall", "Majuro", "Oceanía", "Micronesia", [], [], ""],
+["SB", "Islas Salomón", "Honiara", "Oceanía", "Melanesia", [], [], ""],
+["IL", "Israel", "Jerusalén", "Asia", "Asia occidental", [], ["Tel Aviv"], "Jerusalén es la capital declarada; su estatuto está disputado y la mayoría de embajadas están en Tel Aviv."],
+["IT", "Italia", "Roma", "Europa", "Europa del sur", [], [], ""],
+["JM", "Jamaica", "Kingston", "América", "Caribe", [], [], ""],
+["JP", "Japón", "Tokio", "Asia", "Asia oriental", [], [], ""],
+["JO", "Jordania", "Amán", "Asia", "Asia occidental", [], [], ""],
+["KZ", "Kazajistán", "Astaná", "Asia", "Asia central", [], ["Nursultán", "Nur-Sultán", "Akmola"], "Astaná; se llamó Nursultán entre 2019 y 2022."],
+["KE", "Kenia", "Nairobi", "África", "África oriental", [], [], ""],
+["KG", "Kirguistán", "Biskek", "Asia", "Asia central", [], [], ""],
+["KI", "Kiribati", "Tarawa Sur", "Oceanía", "Micronesia", [], ["Tarawa"], ""],
+["KW", "Kuwait", "Ciudad de Kuwait", "Asia", "Asia occidental", [], [], ""],
+["LA", "Laos", "Vientián", "Asia", "Sudeste asiático", [], [], ""],
+["LS", "Lesoto", "Maseru", "África", "África austral", [], [], ""],
+["LV", "Letonia", "Riga", "Europa", "Europa del norte", [], [], ""],
+["LR", "Liberia", "Monrovia", "África", "África occidental", [], [], ""],
+["LY", "Libia", "Trípoli", "África", "Norte de África", [], [], ""],
+["LI", "Liechtenstein", "Vaduz", "Europa", "Europa occidental", [], [], ""],
+["LT", "Lituania", "Vilna", "Europa", "Europa del norte", [], [], ""],
+["LU", "Luxemburgo", "Luxemburgo", "Europa", "Europa occidental", [], [], ""],
+["LB", "Líbano", "Beirut", "Asia", "Asia occidental", [], [], ""],
+["MK", "Macedonia del Norte", "Skopie", "Europa", "Europa del sureste", ["Macedonia"], [], ""],
+["MG", "Madagascar", "Antananarivo", "África", "África oriental", [], [], ""],
+["MY", "Malasia", "Kuala Lumpur", "Asia", "Sudeste asiático", [], [], ""],
+["MW", "Malaui", "Lilongüe", "África", "África oriental", [], [], ""],
+["MV", "Maldivas", "Malé", "Asia", "Asia del sur", [], ["Male"], ""],
+["MT", "Malta", "La Valeta", "Europa", "Europa del sur", [], [], ""],
+["ML", "Malí", "Bamako", "África", "África occidental", [], [], ""],
+["MA", "Marruecos", "Rabat", "África", "Norte de África", [], [], ""],
+["MU", "Mauricio", "Port Louis", "África", "África oriental", [], [], ""],
+["MR", "Mauritania", "Nuakchot", "África", "África occidental", [], [], ""],
+["FM", "Micronesia", "Palikir", "Oceanía", "Micronesia", ["Estados Federados de Micronesia"], [], ""],
+["MD", "Moldavia", "Chisináu", "Europa", "Europa del este", [], ["Chisinau", "Kishinev"], ""],
+["MN", "Mongolia", "Ulán Bator", "Asia", "Asia oriental", [], [], ""],
+["ME", "Montenegro", "Podgorica", "Europa", "Europa del sureste", [], [], ""],
+["MZ", "Mozambique", "Maputo", "África", "África oriental", [], [], ""],
+["MX", "México", "Ciudad de México", "América", "Norteamérica", [], [], ""],
+["MC", "Mónaco", "Mónaco", "Europa", "Europa occidental", [], [], ""],
+["NA", "Namibia", "Windhoek", "África", "África austral", [], [], ""],
+["NR", "Nauru", "Yaren", "Oceanía", "Micronesia", [], [], ""],
+["NP", "Nepal", "Katmandú", "Asia", "Asia del sur", [], [], ""],
+["NI", "Nicaragua", "Managua", "América", "Centroamérica", [], [], ""],
+["NG", "Nigeria", "Abuya", "África", "África occidental", [], [], ""],
+["NO", "Noruega", "Oslo", "Europa", "Europa del norte", [], [], ""],
+["NZ", "Nueva Zelanda", "Wellington", "Oceanía", "Australia y Nueva Zelanda", [], [], ""],
+["NE", "Níger", "Niamey", "África", "África occidental", [], [], ""],
+["OM", "Omán", "Mascate", "Asia", "Asia occidental", [], [], ""],
+["PK", "Pakistán", "Islamabad", "Asia", "Asia del sur", [], [], ""],
+["PW", "Palaos", "Ngerulmud", "Oceanía", "Micronesia", [], [], ""],
+["PS", "Palestina", "Ramala", "Asia", "Asia occidental", [], [], "Ramala es la sede administrativa; Palestina reclama Jerusalén Este como capital."],
+["PA", "Panamá", "Ciudad de Panamá", "América", "Centroamérica", [], [], ""],
+["PG", "Papúa Nueva Guinea", "Puerto Moresby", "Oceanía", "Melanesia", [], [], ""],
+["PY", "Paraguay", "Asunción", "América", "Sudamérica", [], [], ""],
+["NL", "Países Bajos", "Ámsterdam", "Europa", "Europa occidental", ["Holanda"], ["La Haya"], "Ámsterdam es la capital; el gobierno y la Corte están en La Haya."],
+["PE", "Perú", "Lima", "América", "Sudamérica", [], [], ""],
+["PL", "Polonia", "Varsovia", "Europa", "Europa central", [], [], ""],
+["PT", "Portugal", "Lisboa", "Europa", "Europa del sur", [], [], ""],
+["GB", "Reino Unido", "Londres", "Europa", "Europa del norte", ["Gran Bretaña", "Inglaterra"], [], ""],
+["CF", "República Centroafricana", "Bangui", "África", "África central", [], [], ""],
+["CZ", "República Checa", "Praga", "Europa", "Europa central", ["Chequia"], [], "República Checa o Chequia; ambas son oficiales en español."],
+["CD", "República Democrática del Congo", "Kinsasa", "África", "África central", ["Congo (RDC)", "Zaire"], [], ""],
+["DO", "República Dominicana", "Santo Domingo", "América", "Caribe", ["Dominicana"], [], ""],
+["CG", "República del Congo", "Brazzaville", "África", "África central", [], [], ""],
+["RW", "Ruanda", "Kigali", "África", "África oriental", [], [], ""],
+["RO", "Rumania", "Bucarest", "Europa", "Europa del sureste", ["Rumanía"], [], ""],
+["RU", "Rusia", "Moscú", "Europa", "Europa del este", [], [], ""],
+["WS", "Samoa", "Apia", "Oceanía", "Polinesia", [], [], ""],
+["KN", "San Cristóbal y Nieves", "Basseterre", "América", "Caribe", [], [], ""],
+["SM", "San Marino", "San Marino", "Europa", "Europa del sur", [], ["Ciudad de San Marino"], ""],
+["VC", "San Vicente y las Granadinas", "Kingstown", "América", "Caribe", [], [], ""],
+["LC", "Santa Lucía", "Castries", "América", "Caribe", [], [], ""],
+["ST", "Santo Tomé y Príncipe", "Santo Tomé", "África", "África central", [], [], ""],
+["SN", "Senegal", "Dakar", "África", "África occidental", [], [], ""],
+["RS", "Serbia", "Belgrado", "Europa", "Europa del sureste", [], [], ""],
+["SC", "Seychelles", "Victoria", "África", "África oriental", [], [], ""],
+["SL", "Sierra Leona", "Freetown", "África", "África occidental", [], [], ""],
+["SG", "Singapur", "Singapur", "Asia", "Sudeste asiático", [], [], ""],
+["SY", "Siria", "Damasco", "Asia", "Asia occidental", [], [], ""],
+["SO", "Somalia", "Mogadiscio", "África", "África oriental", [], [], ""],
+["LK", "Sri Lanka", "Sri Jayawardenapura Kotte", "Asia", "Asia del sur", [], ["Colombo", "Kotte"], "Sri Jayawardenapura Kotte es la capital oficial; Colombo es la capital comercial."],
+["ZA", "Sudáfrica", "Pretoria", "África", "África austral", [], ["Ciudad del Cabo", "Bloemfontein", "Cape Town"], "Tres capitales: Pretoria (ejecutiva), Ciudad del Cabo (legislativa) y Bloemfontein (judicial)."],
+["SD", "Sudán", "Jartum", "África", "Norte de África", [], [], ""],
+["SS", "Sudán del Sur", "Yuba", "África", "África central", [], [], ""],
+["SE", "Suecia", "Estocolmo", "Europa", "Europa del norte", [], [], ""],
+["CH", "Suiza", "Berna", "Europa", "Europa occidental", [], [], ""],
+["SR", "Surinam", "Paramaribo", "América", "Sudamérica", [], [], ""],
+["TH", "Tailandia", "Bangkok", "Asia", "Sudeste asiático", [], [], ""],
+["TZ", "Tanzania", "Dodoma", "África", "África oriental", [], ["Dar es Salaam"], "Dodoma es la capital desde 1996; Dar es Salaam fue la anterior."],
+["TJ", "Tayikistán", "Dusambé", "Asia", "Asia central", [], [], ""],
+["TL", "Timor Oriental", "Dili", "Asia", "Sudeste asiático", ["Timor-Leste"], [], ""],
+["TG", "Togo", "Lomé", "África", "África occidental", [], [], ""],
+["TO", "Tonga", "Nukualofa", "Oceanía", "Polinesia", [], ["Nuku'alofa"], ""],
+["TT", "Trinidad y Tobago", "Puerto España", "América", "Caribe", [], ["Port of Spain"], ""],
+["TM", "Turkmenistán", "Asjabad", "Asia", "Asia central", [], [], ""],
+["TR", "Turquía", "Ankara", "Asia", "Asia occidental", ["Türkiye"], [], ""],
+["TV", "Tuvalu", "Funafuti", "Oceanía", "Polinesia", [], [], ""],
+["TN", "Túnez", "Túnez", "África", "Norte de África", [], [], ""],
+["UA", "Ucrania", "Kiev", "Europa", "Europa del este", [], ["Kyiv"], "Kiev (Kyiv en transliteración del ucraniano)."],
+["UG", "Uganda", "Kampala", "África", "África oriental", [], [], ""],
+["UY", "Uruguay", "Montevideo", "América", "Sudamérica", [], [], ""],
+["UZ", "Uzbekistán", "Taskent", "Asia", "Asia central", [], [], ""],
+["VU", "Vanuatu", "Port Vila", "Oceanía", "Melanesia", [], [], ""],
+["VE", "Venezuela", "Caracas", "América", "Sudamérica", [], [], ""],
+["VN", "Vietnam", "Hanói", "Asia", "Sudeste asiático", [], ["Hanoi"], ""],
+["YE", "Yemen", "Saná", "Asia", "Asia occidental", [], ["Adén"], "Saná es la capital oficial; Adén es sede del gobierno reconocido desde 2015."],
+["DJ", "Yibuti", "Ciudad de Yibuti", "África", "África oriental", [], ["Yibuti", "Djibouti"], ""],
+["ZM", "Zambia", "Lusaka", "África", "África oriental", [], [], ""],
+["ZW", "Zimbabue", "Harare", "África", "África oriental", [], [], ""]
+];
+
+const PAISES = DATOS.map(function (f) {
+  return {
+    codigo: f[0], pais: f[1], capital: f[2], continente: f[3], region: f[4],
+    aliasPais: f[5] || [], aliasCapital: f[6] || [], nota: f[7] || ""
+  };
+});
+
+const CONTINENTES = ["África", "América", "Asia", "Europa", "Oceanía"];
+
+const MODOS = [
+  { id: "bandera-pais",    etiqueta: "Bandera → país",    muestra: "bandera", pide: "pais" },
+  { id: "pais-capital",    etiqueta: "País → capital",    muestra: "pais",    pide: "capital" },
+  { id: "capital-pais",    etiqueta: "Capital → país",    muestra: "capital", pide: "pais" },
+  { id: "bandera-capital", etiqueta: "Bandera → capital", muestra: "bandera", pide: "capital" },
+  { id: "escribe-capital", etiqueta: "Escribir la capital", muestra: "pais",  pide: "capital", escribir: true },
+  { id: "mixto",           etiqueta: "Mixto",             mezcla: true }
+];
+
+const CANTIDADES = [10, 20, 40, 0];
+
+// ---------- utilidades ----------
+function normaliza(s) {
+  return (s || "")
+    .normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+function distancia(a, b) {
+  if (a === b) return 0;
+  const m = a.length, n = b.length;
+  if (Math.abs(m - n) > 1) return 2;
+  let fila = new Array(n + 1);
+  for (let j = 0; j <= n; j++) fila[j] = j;
+  for (let i = 1; i <= m; i++) {
+    let prev = fila[0]; fila[0] = i;
+    for (let j = 1; j <= n; j++) {
+      const tmp = fila[j];
+      fila[j] = Math.min(fila[j] + 1, fila[j - 1] + 1, prev + (a[i - 1] === b[j - 1] ? 0 : 1));
+      prev = tmp;
+    }
+  }
+  return fila[n];
+}
+function revuelve(xs) {
+  const a = xs.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+function reloj(ms) {
+  const s = Math.max(0, Math.round(ms / 1000));
+  return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
+}
+function $(id) { return document.getElementById(id); }
+
+// ---------- progreso guardado ----------
+const LLAVE = "capitales.progreso.v1";
+let progreso = {};
+try {
+  const crudo = localStorage.getItem(LLAVE);
+  if (crudo) progreso = JSON.parse(crudo) || {};
+} catch (e) { progreso = {}; }
+
+function guardaProgreso() {
+  try { localStorage.setItem(LLAVE, JSON.stringify(progreso)); } catch (e) {}
+}
+function registra(codigo, bien) {
+  const r = progreso[codigo] || { bien: 0, mal: 0, seguidas: 0 };
+  if (bien) { r.bien++; r.seguidas++; } else { r.mal++; r.seguidas = 0; }
+  r.ultimo = bien ? 1 : 0;
+  progreso[codigo] = r;
+  guardaProgreso();
+}
+function dominado(codigo) {
+  const r = progreso[codigo];
+  return !!r && r.seguidas >= 2;
+}
+function porRepasar() {
+  return PAISES.filter(function (p) {
+    const r = progreso[p.codigo];
+    return r && (r.ultimo === 0 || r.mal > r.bien);
+  });
+}
+
+// ---------- estado ----------
+let elegido = { modo: "bandera-pais", ambito: "Todos", cantidad: 20 };
+let sesion = null;
+
+// ---------- pintar selectores ----------
+function chips(contenedor, items, activo, alCambiar) {
+  const zona = $(contenedor);
+  zona.innerHTML = "";
+  items.forEach(function (it) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = it.etiqueta;
+    b.setAttribute("aria-pressed", String(it.valor === activo()));
+    b.addEventListener("click", function () {
+      alCambiar(it.valor);
+      Array.prototype.forEach.call(zona.children, function (c, i) {
+        c.setAttribute("aria-pressed", String(items[i].valor === activo()));
+      });
+      pintaPie();
+    });
+    zona.appendChild(b);
+  });
+}
+
+function pintaSelectores() {
+  chips("op-modo", MODOS.map(function (m) { return { etiqueta: m.etiqueta, valor: m.id }; }),
+    function () { return elegido.modo; }, function (v) { elegido.modo = v; });
+  chips("op-ambito", [{ etiqueta: "Todos", valor: "Todos" }].concat(
+      CONTINENTES.map(function (c) { return { etiqueta: c, valor: c }; })),
+    function () { return elegido.ambito; }, function (v) { elegido.ambito = v; });
+  chips("op-cantidad", CANTIDADES.map(function (n) {
+      return { etiqueta: n === 0 ? "Todos" : String(n), valor: n };
+    }), function () { return elegido.cantidad; }, function (v) { elegido.cantidad = v; });
+}
+
+function baraja() {
+  return elegido.ambito === "Todos"
+    ? PAISES.slice()
+    : PAISES.filter(function (p) { return p.continente === elegido.ambito; });
+}
+
+function pintaPie() {
+  const n = baraja().length;
+  const total = elegido.cantidad === 0 ? n : Math.min(elegido.cantidad, n);
+  const m = MODOS.find(function (x) { return x.id === elegido.modo; });
+  $("pie-inicio").textContent = total + " reactivos de " + n + " países · " + m.etiqueta +
+    " · el examen se califica sobre 10; la práctica libre no cuenta para la calificación.";
+  const dom = PAISES.filter(function (p) { return dominado(p.codigo); }).length;
+  const fall = porRepasar().length;
+  $("c-dominados").textContent = dom;
+  $("c-fallos").textContent = fall;
+  $("btn-fallos").classList.toggle("oculto", fall < 4);
+  $("btn-fallos").textContent = "Repasar mis fallos (" + fall + ")";
+}
+
+// ---------- navegación ----------
+const PANTALLAS = ["inicio", "juego", "final", "estudio", "progreso"];
+function ver(cual) {
+  PANTALLAS.forEach(function (p) { $("p-" + p).classList.toggle("oculto", p !== cual); });
+  $("instrumentos").classList.toggle("oculto", cual !== "juego");
+  $("pestanas").classList.toggle("oculto", cual === "juego");
+  Array.prototype.forEach.call($("pestanas").children, function (b) {
+    const destino = b.getAttribute("data-ir");
+    b.setAttribute("aria-current", String(destino === cual));
+  });
+  if (cual === "inicio") pintaPie();
+  if (cual === "progreso") pintaProgreso();
+  window.scrollTo(0, 0);
+}
+Array.prototype.forEach.call($("pestanas").children, function (b) {
+  b.addEventListener("click", function () { ver(b.getAttribute("data-ir")); });
+});
+
+// ---------- armar reactivos ----------
+function modoDe(p) {
+  const m = MODOS.find(function (x) { return x.id === elegido.modo; });
+  if (!m.mezcla) return m;
+  const cuatro = MODOS.filter(function (x) { return !x.mezcla && !x.escribir; });
+  return cuatro[Math.floor(Math.random() * cuatro.length)];
+}
+
+function textoDe(p, cual) {
+  return cual === "bandera" ? p.bandera : cual === "pais" ? p.pais : p.capital;
+}
+
+function distractores(p, pide, pool) {
+  const mismos = pool.filter(function (q) {
+    return q.codigo !== p.codigo && q.continente === p.continente;
+  });
+  const resto = pool.filter(function (q) {
+    return q.codigo !== p.codigo && q.continente !== p.continente;
+  });
+  const candidatos = revuelve(mismos).concat(revuelve(resto));
+  const vistos = {}; vistos[normaliza(textoDe(p, pide))] = true;
+  const salida = [];
+  for (let i = 0; i < candidatos.length && salida.length < 3; i++) {
+    const t = textoDe(candidatos[i], pide);
+    const k = normaliza(t);
+    if (!vistos[k]) { vistos[k] = true; salida.push(candidatos[i]); }
+  }
+  return salida;
+}
+
+function armaReactivo(p, pool) {
+  const m = modoDe(p);
+  const r = {
+    pais: p, modo: m,
+    enunciado: m.muestra === "bandera" ? "¿De qué país es esta bandera?"
+      : m.muestra === "pais" ? (m.pide === "capital" ? "¿Cuál es su capital?" : "")
+      : "¿De qué país es esta capital?",
+    muestra: m.muestra, pide: m.pide,
+    sujeto: textoDe(p, m.muestra),
+    correcta: textoDe(p, m.pide),
+    escribir: !!m.escribir
+  };
+  if (m.muestra === "bandera" && m.pide === "capital") r.enunciado = "¿Cuál es la capital de este país?";
+  if (!r.escribir) {
+    r.opciones = revuelve([p].concat(distractores(p, m.pide, pool))).map(function (q) {
+      return textoDe(q, m.pide);
+    });
+  }
+  return r;
+}
+
+// ---------- examen ----------
+function arranca(lista, esExamen, rotulo) {
+  const pool = PAISES.slice();
+  const orden = revuelve(lista);
+  const total = esExamen && elegido.cantidad > 0 ? Math.min(elegido.cantidad, orden.length) : orden.length;
+  sesion = {
+    reactivos: orden.slice(0, total).map(function (p) { return armaReactivo(p, pool); }),
+    i: 0, aciertos: 0, errores: [], examen: esExamen, rotulo: rotulo || "Resultado",
+    inicio: Date.now(), contestado: false
+  };
+  ver("juego");
+  if (sesion.cronometro) clearInterval(sesion.cronometro);
+  sesion.cronometro = setInterval(tictac, 1000);
+  pintaReactivo();
+}
+function tictac() {
+  if (!sesion) return;
+  $("marcador-reloj").innerHTML = "<b>" + reloj(Date.now() - sesion.inicio) + "</b>";
+}
+
+function pintaReactivo() {
+  const r = sesion.reactivos[sesion.i];
+  sesion.contestado = false;
+  $("marcador-pos").innerHTML = "Reactivo <b>" + (sesion.i + 1) + "</b> de <b>" + sesion.reactivos.length + "</b>";
+  $("marcador-aciertos").innerHTML = "Aciertos <b>" + sesion.aciertos + "</b>";
+  $("riel").style.width = (sesion.i / sesion.reactivos.length * 100) + "%";
+  tictac();
+
+  $("enunciado").textContent = r.enunciado;
+  const zona = $("sujeto-zona");
+  zona.innerHTML = "";
+  if (r.muestra === "bandera") {
+    const b = document.createElement("span");
+    b.className = "bandera"; b.textContent = r.sujeto;
+    b.setAttribute("role", "img");
+    b.setAttribute("aria-label", "Bandera del país con código " + r.pais.codigo);
+    zona.appendChild(b);
+  } else {
+    const h = document.createElement("p");
+    h.className = "sujeto"; h.textContent = r.sujeto;
+    zona.appendChild(h);
+  }
+
+  $("veredicto").classList.add("oculto");
+  $("apunte").classList.add("oculto");
+  $("btn-siguiente").classList.add("oculto");
+  $("btn-siguiente").textContent = sesion.i + 1 < sesion.reactivos.length ? "Siguiente" : "Ver resultado";
+
+  const caja = $("respuestas");
+  caja.innerHTML = "";
+  if (r.escribir) {
+    caja.classList.add("oculto");
+    $("forma-escribir").classList.remove("oculto");
+    $("campo").value = ""; $("campo").disabled = false;
+    $("campo").focus();
+  } else {
+    caja.classList.remove("oculto");
+    $("forma-escribir").classList.add("oculto");
+    r.opciones.forEach(function (op, k) {
+      const b = document.createElement("button");
+      b.type = "button";
+      const t = document.createElement("span");
+      t.className = "tecla"; t.textContent = String(k + 1);
+      const s = document.createElement("span"); s.textContent = op;
+      b.appendChild(t); b.appendChild(s);
+      b.addEventListener("click", function () { contesta(op, b); });
+      caja.appendChild(b);
+    });
+  }
+}
+
+function aceptable(dicho, r) {
+  const n = normaliza(dicho);
+  if (!n) return false;
+  const buenas = [r.correcta].concat(r.pide === "capital" ? r.pais.aliasCapital : r.pais.aliasPais);
+  for (let i = 0; i < buenas.length; i++) {
+    const b = normaliza(buenas[i]);
+    if (n === b) return true;
+    if (b.length >= 6 && distancia(n, b) <= 1) return true;
+  }
+  return false;
+}
+
+function contesta(dicho, boton) {
+  if (sesion.contestado) return;
+  sesion.contestado = true;
+  const r = sesion.reactivos[sesion.i];
+  const bien = aceptable(dicho, r);
+  registra(r.pais.codigo, bien);
+  if (bien) sesion.aciertos++;
+  else sesion.errores.push({ r: r, dicho: dicho });
+
+  const v = $("veredicto");
+  v.classList.remove("oculto", "bien", "mal");
+  v.classList.add(bien ? "bien" : "mal");
+  v.textContent = bien ? "Correcto." : "No. Era " + r.correcta + ".";
+  if (!bien && r.pide === "pais") v.textContent = "No. Era " + r.correcta + " " + r.pais.bandera + ".";
+
+  if (r.escribir) {
+    $("campo").disabled = true;
+  } else {
+    Array.prototype.forEach.call($("respuestas").children, function (b) {
+      b.disabled = true;
+      const txt = b.lastChild.textContent;
+      if (normaliza(txt) === normaliza(r.correcta)) b.classList.add("bien");
+      else if (b === boton) b.classList.add("mal");
+    });
+  }
+
+  if (r.pais.nota) {
+    $("apunte").textContent = r.pais.nota;
+    $("apunte").classList.remove("oculto");
+  }
+  $("marcador-aciertos").innerHTML = "Aciertos <b>" + sesion.aciertos + "</b>";
+  $("btn-siguiente").classList.remove("oculto");
+  $("btn-siguiente").focus();
+}
+
+function siguiente() {
+  if (!sesion.contestado) return;
+  if (sesion.i + 1 < sesion.reactivos.length) { sesion.i++; pintaReactivo(); }
+  else cierra();
+}
+
+function cierra() {
+  clearInterval(sesion.cronometro);
+  const total = sesion.reactivos.length;
+  const ms = Date.now() - sesion.inicio;
+  const calif = total ? (sesion.aciertos / total) * 10 : 0;
+  $("final-rotulo").textContent = sesion.rotulo;
+  $("final-calif").textContent = sesion.examen
+    ? calif.toFixed(1).replace(".", ",") + " / 10"
+    : sesion.aciertos + " de " + total;
+  $("final-aciertos").textContent = sesion.aciertos;
+  $("final-errores").textContent = total - sesion.aciertos;
+  $("final-tiempo").textContent = reloj(ms);
+  $("final-ritmo").textContent = total ? Math.round(ms / total / 1000) + " s" : "—";
+
+  const ul = $("final-errores-lista");
+  ul.innerHTML = "";
+  $("titulo-errores").textContent = sesion.errores.length
+    ? "Lo que falta afinar" : "Sin errores. Todo el examen limpio.";
+  sesion.errores.forEach(function (e) {
+    const li = document.createElement("li");
+    const b = document.createElement("span"); b.className = "bnd"; b.textContent = e.r.pais.bandera;
+    const d = document.createElement("div"); d.style.minWidth = "0";
+    const fuerte = document.createElement("div");
+    fuerte.innerHTML = "<strong>" + e.r.pais.pais + "</strong> — " + e.r.pais.capital;
+    const tuya = document.createElement("div");
+    tuya.className = "tuya";
+    tuya.textContent = "respondiste: " + (e.dicho || "—");
+    d.appendChild(fuerte); d.appendChild(tuya);
+    li.appendChild(b); li.appendChild(d);
+    ul.appendChild(li);
+  });
+  $("btn-repetir-fallos").classList.toggle("oculto", sesion.errores.length === 0);
+  sesion.ultimosErrores = sesion.errores.map(function (e) { return e.r.pais; });
+  ver("final");
+}
+
+// ---------- estudio ----------
+function pintaTabla(filtro) {
+  const n = normaliza(filtro);
+  const vistos = PAISES.filter(function (p) {
+    if (!n) return true;
+    return normaliza(p.pais).indexOf(n) >= 0 || normaliza(p.capital).indexOf(n) >= 0 ||
+      normaliza(p.continente).indexOf(n) >= 0 || normaliza(p.region).indexOf(n) >= 0 ||
+      p.aliasPais.some(function (a) { return normaliza(a).indexOf(n) >= 0; });
+  });
+  $("cuenta-estudio").textContent = vistos.length + (vistos.length === 1 ? " país" : " países");
+  const zona = $("tabla");
+  zona.innerHTML = "";
+  vistos.forEach(function (p) {
+    const d = document.createElement("div"); d.className = "reg";
+    const b = document.createElement("span"); b.className = "bnd"; b.textContent = p.bandera;
+    const nom = document.createElement("div"); nom.className = "pais"; nom.textContent = p.pais;
+    const cap = document.createElement("div"); cap.className = "cap";
+    cap.innerHTML = "<span>capital</span>" + p.capital + " · " + p.region;
+    d.appendChild(b); d.appendChild(nom); d.appendChild(cap);
+    if (p.nota) {
+      const a = document.createElement("div"); a.className = "apunte"; a.textContent = p.nota;
+      d.appendChild(a);
+    }
+    zona.appendChild(d);
+  });
+}
+
+// ---------- progreso ----------
+function pintaProgreso() {
+  const zona = $("medidores");
+  zona.innerHTML = "";
+  CONTINENTES.concat(["Todos"]).forEach(function (c) {
+    const grupo = c === "Todos" ? PAISES : PAISES.filter(function (p) { return p.continente === c; });
+    const dom = grupo.filter(function (p) { return dominado(p.codigo); }).length;
+    const pct = grupo.length ? Math.round(dom / grupo.length * 100) : 0;
+    const d = document.createElement("div"); d.className = "medidor";
+    const nom = document.createElement("div"); nom.className = "nom"; nom.textContent = c;
+    const p = document.createElement("div"); p.className = "pct";
+    p.textContent = dom + "/" + grupo.length + " · " + pct + "%";
+    const barra = document.createElement("div"); barra.className = "barra";
+    const i = document.createElement("i"); i.style.width = pct + "%";
+    barra.appendChild(i);
+    d.appendChild(nom); d.appendChild(p); d.appendChild(barra);
+    zona.appendChild(d);
+  });
+
+  const ul = $("peores");
+  ul.innerHTML = "";
+  const malos = PAISES.filter(function (p) { return progreso[p.codigo] && progreso[p.codigo].mal > 0; })
+    .sort(function (a, b) {
+      const ra = progreso[a.codigo], rb = progreso[b.codigo];
+      return (rb.mal - rb.bien) - (ra.mal - ra.bien) || rb.mal - ra.mal;
+    }).slice(0, 10);
+  if (!malos.length) {
+    const li = document.createElement("li");
+    li.style.borderTop = "0";
+    li.innerHTML = "<span class='vacio'>Todavía no hay errores registrados.</span>";
+    ul.appendChild(li);
+    return;
+  }
+  malos.forEach(function (p) {
+    const r = progreso[p.codigo];
+    const li = document.createElement("li");
+    const b = document.createElement("span"); b.className = "bnd"; b.textContent = p.bandera;
+    const d = document.createElement("div"); d.style.minWidth = "0";
+    d.innerHTML = "<strong>" + p.pais + "</strong> — " + p.capital +
+      "<div class='tuya'>" + r.bien + " aciertos · " + r.mal + " errores</div>";
+    li.appendChild(b); li.appendChild(d);
+    ul.appendChild(li);
+  });
+}
+
+// ---------- enganches ----------
+$("btn-examen").addEventListener("click", function () {
+  arranca(baraja(), true, "Examen · " + elegido.ambito);
+});
+$("btn-practica").addEventListener("click", function () {
+  arranca(baraja(), false, "Práctica · " + elegido.ambito);
+});
+$("btn-fallos").addEventListener("click", function () {
+  const lista = porRepasar();
+  if (lista.length) arranca(lista, false, "Repaso de fallos");
+});
+$("btn-siguiente").addEventListener("click", siguiente);
+$("btn-salir").addEventListener("click", function () {
+  if (sesion) clearInterval(sesion.cronometro);
+  ver("inicio");
+});
+$("btn-otro").addEventListener("click", function () { ver("inicio"); });
+$("btn-repetir-fallos").addEventListener("click", function () {
+  const lista = sesion && sesion.ultimosErrores ? sesion.ultimosErrores : [];
+  if (lista.length) arranca(lista, false, "Repaso de errores");
+});
+$("forma-escribir").addEventListener("submit", function (ev) {
+  ev.preventDefault();
+  if (sesion.contestado) { siguiente(); return; }
+  contesta($("campo").value.trim(), null);
+});
+$("busca").addEventListener("input", function () { pintaTabla($("busca").value); });
+$("btn-borrar").addEventListener("click", function () {
+  progreso = {};
+  guardaProgreso();
+  pintaProgreso();
+  pintaPie();
+});
+document.addEventListener("keydown", function (ev) {
+  if ($("p-juego").classList.contains("oculto")) return;
+  const r = sesion && sesion.reactivos[sesion.i];
+  if (!r) return;
+  if (!sesion.contestado && !r.escribir && /^[1-4]$/.test(ev.key)) {
+    const b = $("respuestas").children[Number(ev.key) - 1];
+    if (b) { ev.preventDefault(); b.click(); }
+  } else if (sesion.contestado && (ev.key === "Enter" || ev.key === " ")) {
+    if (document.activeElement && document.activeElement.id === "campo") return;
+    ev.preventDefault(); siguiente();
+  }
+});
+
+// ---------- arranque ----------
+$("c-paises").textContent = PAISES.length;
+pintaSelectores();
+pintaTabla("");
+pintaPie();
+ver("inicio");
+</script>

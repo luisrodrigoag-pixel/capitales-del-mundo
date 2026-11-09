@@ -1,0 +1,1727 @@
+[
+{
+"codigo": "AF",
+"pais": "Afganistán",
+"capital": "Kabul",
+"bandera": "🇦🇫",
+"continente": "Asia",
+"region": "Asia del sur"
+},
+{
+"codigo": "AL",
+"pais": "Albania",
+"capital": "Tirana",
+"bandera": "🇦🇱",
+"continente": "Europa",
+"region": "Europa del sureste"
+},
+{
+"codigo": "DE",
+"pais": "Alemania",
+"capital": "Berlín",
+"bandera": "🇩🇪",
+"continente": "Europa",
+"region": "Europa occidental"
+},
+{
+"codigo": "AD",
+"pais": "Andorra",
+"capital": "Andorra la Vieja",
+"bandera": "🇦🇩",
+"continente": "Europa",
+"region": "Europa del sur"
+},
+{
+"codigo": "AO",
+"pais": "Angola",
+"capital": "Luanda",
+"bandera": "🇦🇴",
+"continente": "África",
+"region": "África central"
+},
+{
+"codigo": "AG",
+"pais": "Antigua y Barbuda",
+"capital": "Saint John's",
+"bandera": "🇦🇬",
+"continente": "América",
+"region": "Caribe",
+"alias_capital": [
+"Saint John"
+]
+},
+{
+"codigo": "SA",
+"pais": "Arabia Saudí",
+"capital": "Riad",
+"bandera": "🇸🇦",
+"continente": "Asia",
+"region": "Asia occidental"
+},
+{
+"codigo": "DZ",
+"pais": "Argelia",
+"capital": "Argel",
+"bandera": "🇩🇿",
+"continente": "África",
+"region": "Norte de África"
+},
+{
+"codigo": "AR",
+"pais": "Argentina",
+"capital": "Buenos Aires",
+"bandera": "🇦🇷",
+"continente": "América",
+"region": "Sudamérica"
+},
+{
+"codigo": "AM",
+"pais": "Armenia",
+"capital": "Ereván",
+"bandera": "🇦🇲",
+"continente": "Asia",
+"region": "Asia occidental"
+},
+{
+"codigo": "AU",
+"pais": "Australia",
+"capital": "Canberra",
+"bandera": "🇦🇺",
+"continente": "Oceanía",
+"region": "Australia y Nueva Zelanda"
+},
+{
+"codigo": "AT",
+"pais": "Austria",
+"capital": "Viena",
+"bandera": "🇦🇹",
+"continente": "Europa",
+"region": "Europa central"
+},
+{
+"codigo": "AZ",
+"pais": "Azerbaiyán",
+"capital": "Bakú",
+"bandera": "🇦🇿",
+"continente": "Asia",
+"region": "Asia occidental"
+},
+{
+"codigo": "BS",
+"pais": "Bahamas",
+"capital": "Nasáu",
+"bandera": "🇧🇸",
+"continente": "América",
+"region": "Caribe"
+},
+{
+"codigo": "BD",
+"pais": "Bangladés",
+"capital": "Daca",
+"bandera": "🇧🇩",
+"continente": "Asia",
+"region": "Asia del sur"
+},
+{
+"codigo": "BB",
+"pais": "Barbados",
+"capital": "Bridgetown",
+"bandera": "🇧🇧",
+"continente": "América",
+"region": "Caribe"
+},
+{
+"codigo": "BH",
+"pais": "Baréin",
+"capital": "Manama",
+"bandera": "🇧🇭",
+"continente": "Asia",
+"region": "Asia occidental"
+},
+{
+"codigo": "BZ",
+"pais": "Belice",
+"capital": "Belmopán",
+"bandera": "🇧🇿",
+"continente": "América",
+"region": "Centroamérica"
+},
+{
+"codigo": "BJ",
+"pais": "Benín",
+"capital": "Porto Novo",
+"bandera": "🇧🇯",
+"continente": "África",
+"region": "África occidental",
+"alias_capital": [
+"Cotonú"
+],
+"nota": "Porto Novo es la capital oficial; Cotonú es la sede del gobierno."
+},
+{
+"codigo": "BY",
+"pais": "Bielorrusia",
+"capital": "Minsk",
+"bandera": "🇧🇾",
+"continente": "Europa",
+"region": "Europa del este"
+},
+{
+"codigo": "MM",
+"pais": "Birmania",
+"capital": "Naipyidó",
+"bandera": "🇲🇲",
+"continente": "Asia",
+"region": "Sudeste asiático",
+"alias_pais": [
+"Myanmar"
+],
+"alias_capital": [
+"Naypyidaw",
+"Nay Pyi Taw"
+],
+"nota": "Naipyidó es la capital desde 2005; Rangún fue la anterior."
+},
+{
+"codigo": "BO",
+"pais": "Bolivia",
+"capital": "Sucre",
+"bandera": "🇧🇴",
+"continente": "América",
+"region": "Sudamérica",
+"alias_capital": [
+"La Paz"
+],
+"nota": "Sucre es la capital constitucional; La Paz es la sede del gobierno."
+},
+{
+"codigo": "BA",
+"pais": "Bosnia y Herzegovina",
+"capital": "Sarajevo",
+"bandera": "🇧🇦",
+"continente": "Europa",
+"region": "Europa del sureste"
+},
+{
+"codigo": "BW",
+"pais": "Botsuana",
+"capital": "Gaborone",
+"bandera": "🇧🇼",
+"continente": "África",
+"region": "África austral"
+},
+{
+"codigo": "BR",
+"pais": "Brasil",
+"capital": "Brasilia",
+"bandera": "🇧🇷",
+"continente": "América",
+"region": "Sudamérica"
+},
+{
+"codigo": "BN",
+"pais": "Brunéi",
+"capital": "Bandar Seri Begawan",
+"bandera": "🇧🇳",
+"continente": "Asia",
+"region": "Sudeste asiático"
+},
+{
+"codigo": "BG",
+"pais": "Bulgaria",
+"capital": "Sofía",
+"bandera": "🇧🇬",
+"continente": "Europa",
+"region": "Europa del sureste"
+},
+{
+"codigo": "BF",
+"pais": "Burkina Faso",
+"capital": "Uagadugú",
+"bandera": "🇧🇫",
+"continente": "África",
+"region": "África occidental"
+},
+{
+"codigo": "BI",
+"pais": "Burundi",
+"capital": "Guitega",
+"bandera": "🇧🇮",
+"continente": "África",
+"region": "África oriental"
+},
+{
+"codigo": "BT",
+"pais": "Bután",
+"capital": "Timbu",
+"bandera": "🇧🇹",
+"continente": "Asia",
+"region": "Asia del sur"
+},
+{
+"codigo": "BE",
+"pais": "Bélgica",
+"capital": "Bruselas",
+"bandera": "🇧🇪",
+"continente": "Europa",
+"region": "Europa occidental"
+},
+{
+"codigo": "CV",
+"pais": "Cabo Verde",
+"capital": "Praia",
+"bandera": "🇨🇻",
+"continente": "África",
+"region": "África occidental",
+"alias_pais": []
+},
+{
+"codigo": "KH",
+"pais": "Camboya",
+"capital": "Nom Pen",
+"bandera": "🇰🇭",
+"continente": "Asia",
+"region": "Sudeste asiático"
+},
+{
+"codigo": "CM",
+"pais": "Camerún",
+"capital": "Yaundé",
+"bandera": "🇨🇲",
+"continente": "África",
+"region": "África central"
+},
+{
+"codigo": "CA",
+"pais": "Canadá",
+"capital": "Ottawa",
+"bandera": "🇨🇦",
+"continente": "América",
+"region": "Norteamérica"
+},
+{
+"codigo": "QA",
+"pais": "Catar",
+"capital": "Doha",
+"bandera": "🇶🇦",
+"continente": "Asia",
+"region": "Asia occidental"
+},
+{
+"codigo": "TD",
+"pais": "Chad",
+"capital": "Yamena",
+"bandera": "🇹🇩",
+"continente": "África",
+"region": "África central"
+},
+{
+"codigo": "CL",
+"pais": "Chile",
+"capital": "Santiago de Chile",
+"bandera": "🇨🇱",
+"continente": "América",
+"region": "Sudamérica",
+"alias_capital": [
+"Santiago"
+]
+},
+{
+"codigo": "CN",
+"pais": "China",
+"capital": "Pekín",
+"bandera": "🇨🇳",
+"continente": "Asia",
+"region": "Asia oriental",
+"alias_pais": [
+"República Popular China"
+],
+"alias_capital": [
+"Beijing"
+]
+},
+{
+"codigo": "CY",
+"pais": "Chipre",
+"capital": "Nicosia",
+"bandera": "🇨🇾",
+"continente": "Europa",
+"region": "Europa del sur"
+},
+{
+"codigo": "VA",
+"pais": "Ciudad del Vaticano",
+"capital": "Ciudad del Vaticano",
+"bandera": "🇻🇦",
+"continente": "Europa",
+"region": "Europa del sur",
+"alias_pais": [
+"Vaticano",
+"Santa Sede"
+]
+},
+{
+"codigo": "CO",
+"pais": "Colombia",
+"capital": "Bogotá",
+"bandera": "🇨🇴",
+"continente": "América",
+"region": "Sudamérica"
+},
+{
+"codigo": "KM",
+"pais": "Comoras",
+"capital": "Moroni",
+"bandera": "🇰🇲",
+"continente": "África",
+"region": "África oriental"
+},
+{
+"codigo": "KP",
+"pais": "Corea del Norte",
+"capital": "Pionyang",
+"bandera": "🇰🇵",
+"continente": "Asia",
+"region": "Asia oriental",
+"alias_pais": []
+},
+{
+"codigo": "KR",
+"pais": "Corea del Sur",
+"capital": "Seúl",
+"bandera": "🇰🇷",
+"continente": "Asia",
+"region": "Asia oriental"
+},
+{
+"codigo": "CR",
+"pais": "Costa Rica",
+"capital": "San José",
+"bandera": "🇨🇷",
+"continente": "América",
+"region": "Centroamérica"
+},
+{
+"codigo": "CI",
+"pais": "Costa de Marfil",
+"capital": "Yamusukro",
+"bandera": "🇨🇮",
+"continente": "África",
+"region": "África occidental",
+"alias_capital": [
+"Abiyán"
+],
+"nota": "Yamusukro es la capital oficial; Abiyán es la sede del gobierno."
+},
+{
+"codigo": "HR",
+"pais": "Croacia",
+"capital": "Zagreb",
+"bandera": "🇭🇷",
+"continente": "Europa",
+"region": "Europa del sureste"
+},
+{
+"codigo": "CU",
+"pais": "Cuba",
+"capital": "La Habana",
+"bandera": "🇨🇺",
+"continente": "América",
+"region": "Caribe"
+},
+{
+"codigo": "DK",
+"pais": "Dinamarca",
+"capital": "Copenhague",
+"bandera": "🇩🇰",
+"continente": "Europa",
+"region": "Europa del norte"
+},
+{
+"codigo": "DM",
+"pais": "Dominica",
+"capital": "Roseau",
+"bandera": "🇩🇲",
+"continente": "América",
+"region": "Caribe"
+},
+{
+"codigo": "EC",
+"pais": "Ecuador",
+"capital": "Quito",
+"bandera": "🇪🇨",
+"continente": "América",
+"region": "Sudamérica"
+},
+{
+"codigo": "EG",
+"pais": "Egipto",
+"capital": "El Cairo",
+"bandera": "🇪🇬",
+"continente": "África",
+"region": "Norte de África"
+},
+{
+"codigo": "SV",
+"pais": "El Salvador",
+"capital": "San Salvador",
+"bandera": "🇸🇻",
+"continente": "América",
+"region": "Centroamérica"
+},
+{
+"codigo": "AE",
+"pais": "Emiratos Árabes Unidos",
+"capital": "Abu Dhabi",
+"bandera": "🇦🇪",
+"continente": "Asia",
+"region": "Asia occidental",
+"alias_pais": [
+"EAU"
+]
+},
+{
+"codigo": "ER",
+"pais": "Eritrea",
+"capital": "Asmara",
+"bandera": "🇪🇷",
+"continente": "África",
+"region": "África oriental"
+},
+{
+"codigo": "SK",
+"pais": "Eslovaquia",
+"capital": "Bratislava",
+"bandera": "🇸🇰",
+"continente": "Europa",
+"region": "Europa central"
+},
+{
+"codigo": "SI",
+"pais": "Eslovenia",
+"capital": "Liubliana",
+"bandera": "🇸🇮",
+"continente": "Europa",
+"region": "Europa central"
+},
+{
+"codigo": "ES",
+"pais": "España",
+"capital": "Madrid",
+"bandera": "🇪🇸",
+"continente": "Europa",
+"region": "Europa del sur"
+},
+{
+"codigo": "US",
+"pais": "Estados Unidos",
+"capital": "Washington D. C.",
+"bandera": "🇺🇸",
+"continente": "América",
+"region": "Norteamérica",
+"alias_pais": [
+"EUA",
+"EEUU",
+"Estados Unidos de América"
+],
+"alias_capital": [
+"Washington"
+]
+},
+{
+"codigo": "EE",
+"pais": "Estonia",
+"capital": "Tallin",
+"bandera": "🇪🇪",
+"continente": "Europa",
+"region": "Europa del norte"
+},
+{
+"codigo": "SZ",
+"pais": "Esuatini",
+"capital": "Mbabane",
+"bandera": "🇸🇿",
+"continente": "África",
+"region": "África austral",
+"alias_pais": [
+"Suazilandia"
+],
+"alias_capital": [
+"Lobamba"
+],
+"nota": "Mbabane es la capital administrativa; Lobamba es la real y legislativa. El país se llama Esuatini desde 2018."
+},
+{
+"codigo": "ET",
+"pais": "Etiopía",
+"capital": "Adís Abeba",
+"bandera": "🇪🇹",
+"continente": "África",
+"region": "África oriental"
+},
+{
+"codigo": "PH",
+"pais": "Filipinas",
+"capital": "Manila",
+"bandera": "🇵🇭",
+"continente": "Asia",
+"region": "Sudeste asiático"
+},
+{
+"codigo": "FI",
+"pais": "Finlandia",
+"capital": "Helsinki",
+"bandera": "🇫🇮",
+"continente": "Europa",
+"region": "Europa del norte"
+},
+{
+"codigo": "FJ",
+"pais": "Fiyi",
+"capital": "Suva",
+"bandera": "🇫🇯",
+"continente": "Oceanía",
+"region": "Melanesia"
+},
+{
+"codigo": "FR",
+"pais": "Francia",
+"capital": "París",
+"bandera": "🇫🇷",
+"continente": "Europa",
+"region": "Europa occidental"
+},
+{
+"codigo": "GA",
+"pais": "Gabón",
+"capital": "Libreville",
+"bandera": "🇬🇦",
+"continente": "África",
+"region": "África central"
+},
+{
+"codigo": "GM",
+"pais": "Gambia",
+"capital": "Banjul",
+"bandera": "🇬🇲",
+"continente": "África",
+"region": "África occidental"
+},
+{
+"codigo": "GE",
+"pais": "Georgia",
+"capital": "Tiflis",
+"bandera": "🇬🇪",
+"continente": "Asia",
+"region": "Asia occidental"
+},
+{
+"codigo": "GH",
+"pais": "Ghana",
+"capital": "Acra",
+"bandera": "🇬🇭",
+"continente": "África",
+"region": "África occidental"
+},
+{
+"codigo": "GD",
+"pais": "Granada",
+"capital": "Saint George's",
+"bandera": "🇬🇩",
+"continente": "América",
+"region": "Caribe",
+"alias_capital": [
+"Saint George"
+]
+},
+{
+"codigo": "GR",
+"pais": "Grecia",
+"capital": "Atenas",
+"bandera": "🇬🇷",
+"continente": "Europa",
+"region": "Europa del sur"
+},
+{
+"codigo": "GT",
+"pais": "Guatemala",
+"capital": "Ciudad de Guatemala",
+"bandera": "🇬🇹",
+"continente": "América",
+"region": "Centroamérica"
+},
+{
+"codigo": "GN",
+"pais": "Guinea",
+"capital": "Conakri",
+"bandera": "🇬🇳",
+"continente": "África",
+"region": "África occidental"
+},
+{
+"codigo": "GQ",
+"pais": "Guinea Ecuatorial",
+"capital": "Malabo",
+"bandera": "🇬🇶",
+"continente": "África",
+"region": "África central",
+"alias_capital": [
+"Ciudad de la Paz",
+"Djibloho",
+"Oyala"
+],
+"nota": "Malabo sigue siendo la capital de hecho; desde 2017 el gobierno designó Ciudad de la Paz (Djibloho) como nueva capital."
+},
+{
+"codigo": "GW",
+"pais": "Guinea-Bisáu",
+"capital": "Bisáu",
+"bandera": "🇬🇼",
+"continente": "África",
+"region": "África occidental"
+},
+{
+"codigo": "GY",
+"pais": "Guyana",
+"capital": "Georgetown",
+"bandera": "🇬🇾",
+"continente": "América",
+"region": "Sudamérica"
+},
+{
+"codigo": "HT",
+"pais": "Haití",
+"capital": "Puerto Príncipe",
+"bandera": "🇭🇹",
+"continente": "América",
+"region": "Caribe"
+},
+{
+"codigo": "HN",
+"pais": "Honduras",
+"capital": "Tegucigalpa",
+"bandera": "🇭🇳",
+"continente": "América",
+"region": "Centroamérica"
+},
+{
+"codigo": "HU",
+"pais": "Hungría",
+"capital": "Budapest",
+"bandera": "🇭🇺",
+"continente": "Europa",
+"region": "Europa central"
+},
+{
+"codigo": "IN",
+"pais": "India",
+"capital": "Nueva Delhi",
+"bandera": "🇮🇳",
+"continente": "Asia",
+"region": "Asia del sur",
+"alias_capital": [
+"Delhi"
+]
+},
+{
+"codigo": "ID",
+"pais": "Indonesia",
+"capital": "Yakarta",
+"bandera": "🇮🇩",
+"continente": "Asia",
+"region": "Sudeste asiático"
+},
+{
+"codigo": "IQ",
+"pais": "Irak",
+"capital": "Bagdad",
+"bandera": "🇮🇶",
+"continente": "Asia",
+"region": "Asia occidental"
+},
+{
+"codigo": "IE",
+"pais": "Irlanda",
+"capital": "Dublín",
+"bandera": "🇮🇪",
+"continente": "Europa",
+"region": "Europa del norte"
+},
+{
+"codigo": "IR",
+"pais": "Irán",
+"capital": "Teherán",
+"bandera": "🇮🇷",
+"continente": "Asia",
+"region": "Asia del sur"
+},
+{
+"codigo": "IS",
+"pais": "Islandia",
+"capital": "Reikiavik",
+"bandera": "🇮🇸",
+"continente": "Europa",
+"region": "Europa del norte"
+},
+{
+"codigo": "MH",
+"pais": "Islas Marshall",
+"capital": "Majuro",
+"bandera": "🇲🇭",
+"continente": "Oceanía",
+"region": "Micronesia"
+},
+{
+"codigo": "SB",
+"pais": "Islas Salomón",
+"capital": "Honiara",
+"bandera": "🇸🇧",
+"continente": "Oceanía",
+"region": "Melanesia"
+},
+{
+"codigo": "IL",
+"pais": "Israel",
+"capital": "Jerusalén",
+"bandera": "🇮🇱",
+"continente": "Asia",
+"region": "Asia occidental",
+"alias_capital": [
+"Tel Aviv"
+],
+"nota": "Jerusalén es la capital declarada; su estatuto está disputado y la mayoría de embajadas están en Tel Aviv."
+},
+{
+"codigo": "IT",
+"pais": "Italia",
+"capital": "Roma",
+"bandera": "🇮🇹",
+"continente": "Europa",
+"region": "Europa del sur"
+},
+{
+"codigo": "JM",
+"pais": "Jamaica",
+"capital": "Kingston",
+"bandera": "🇯🇲",
+"continente": "América",
+"region": "Caribe"
+},
+{
+"codigo": "JP",
+"pais": "Japón",
+"capital": "Tokio",
+"bandera": "🇯🇵",
+"continente": "Asia",
+"region": "Asia oriental"
+},
+{
+"codigo": "JO",
+"pais": "Jordania",
+"capital": "Amán",
+"bandera": "🇯🇴",
+"continente": "Asia",
+"region": "Asia occidental"
+},
+{
+"codigo": "KZ",
+"pais": "Kazajistán",
+"capital": "Astaná",
+"bandera": "🇰🇿",
+"continente": "Asia",
+"region": "Asia central",
+"alias_capital": [
+"Nursultán",
+"Nur-Sultán",
+"Akmola"
+],
+"nota": "Astaná; se llamó Nursultán entre 2019 y 2022."
+},
+{
+"codigo": "KE",
+"pais": "Kenia",
+"capital": "Nairobi",
+"bandera": "🇰🇪",
+"continente": "África",
+"region": "África oriental"
+},
+{
+"codigo": "KG",
+"pais": "Kirguistán",
+"capital": "Biskek",
+"bandera": "🇰🇬",
+"continente": "Asia",
+"region": "Asia central"
+},
+{
+"codigo": "KI",
+"pais": "Kiribati",
+"capital": "Tarawa Sur",
+"bandera": "🇰🇮",
+"continente": "Oceanía",
+"region": "Micronesia",
+"alias_capital": [
+"Tarawa"
+]
+},
+{
+"codigo": "KW",
+"pais": "Kuwait",
+"capital": "Ciudad de Kuwait",
+"bandera": "🇰🇼",
+"continente": "Asia",
+"region": "Asia occidental"
+},
+{
+"codigo": "LA",
+"pais": "Laos",
+"capital": "Vientián",
+"bandera": "🇱🇦",
+"continente": "Asia",
+"region": "Sudeste asiático"
+},
+{
+"codigo": "LS",
+"pais": "Lesoto",
+"capital": "Maseru",
+"bandera": "🇱🇸",
+"continente": "África",
+"region": "África austral"
+},
+{
+"codigo": "LV",
+"pais": "Letonia",
+"capital": "Riga",
+"bandera": "🇱🇻",
+"continente": "Europa",
+"region": "Europa del norte"
+},
+{
+"codigo": "LR",
+"pais": "Liberia",
+"capital": "Monrovia",
+"bandera": "🇱🇷",
+"continente": "África",
+"region": "África occidental"
+},
+{
+"codigo": "LY",
+"pais": "Libia",
+"capital": "Trípoli",
+"bandera": "🇱🇾",
+"continente": "África",
+"region": "Norte de África"
+},
+{
+"codigo": "LI",
+"pais": "Liechtenstein",
+"capital": "Vaduz",
+"bandera": "🇱🇮",
+"continente": "Europa",
+"region": "Europa occidental"
+},
+{
+"codigo": "LT",
+"pais": "Lituania",
+"capital": "Vilna",
+"bandera": "🇱🇹",
+"continente": "Europa",
+"region": "Europa del norte"
+},
+{
+"codigo": "LU",
+"pais": "Luxemburgo",
+"capital": "Luxemburgo",
+"bandera": "🇱🇺",
+"continente": "Europa",
+"region": "Europa occidental"
+},
+{
+"codigo": "LB",
+"pais": "Líbano",
+"capital": "Beirut",
+"bandera": "🇱🇧",
+"continente": "Asia",
+"region": "Asia occidental"
+},
+{
+"codigo": "MK",
+"pais": "Macedonia del Norte",
+"capital": "Skopie",
+"bandera": "🇲🇰",
+"continente": "Europa",
+"region": "Europa del sureste",
+"alias_pais": [
+"Macedonia"
+]
+},
+{
+"codigo": "MG",
+"pais": "Madagascar",
+"capital": "Antananarivo",
+"bandera": "🇲🇬",
+"continente": "África",
+"region": "África oriental"
+},
+{
+"codigo": "MY",
+"pais": "Malasia",
+"capital": "Kuala Lumpur",
+"bandera": "🇲🇾",
+"continente": "Asia",
+"region": "Sudeste asiático"
+},
+{
+"codigo": "MW",
+"pais": "Malaui",
+"capital": "Lilongüe",
+"bandera": "🇲🇼",
+"continente": "África",
+"region": "África oriental"
+},
+{
+"codigo": "MV",
+"pais": "Maldivas",
+"capital": "Malé",
+"bandera": "🇲🇻",
+"continente": "Asia",
+"region": "Asia del sur",
+"alias_capital": [
+"Male"
+]
+},
+{
+"codigo": "MT",
+"pais": "Malta",
+"capital": "La Valeta",
+"bandera": "🇲🇹",
+"continente": "Europa",
+"region": "Europa del sur"
+},
+{
+"codigo": "ML",
+"pais": "Malí",
+"capital": "Bamako",
+"bandera": "🇲🇱",
+"continente": "África",
+"region": "África occidental"
+},
+{
+"codigo": "MA",
+"pais": "Marruecos",
+"capital": "Rabat",
+"bandera": "🇲🇦",
+"continente": "África",
+"region": "Norte de África"
+},
+{
+"codigo": "MU",
+"pais": "Mauricio",
+"capital": "Port Louis",
+"bandera": "🇲🇺",
+"continente": "África",
+"region": "África oriental"
+},
+{
+"codigo": "MR",
+"pais": "Mauritania",
+"capital": "Nuakchot",
+"bandera": "🇲🇷",
+"continente": "África",
+"region": "África occidental"
+},
+{
+"codigo": "FM",
+"pais": "Micronesia",
+"capital": "Palikir",
+"bandera": "🇫🇲",
+"continente": "Oceanía",
+"region": "Micronesia",
+"alias_pais": [
+"Estados Federados de Micronesia"
+]
+},
+{
+"codigo": "MD",
+"pais": "Moldavia",
+"capital": "Chisináu",
+"bandera": "🇲🇩",
+"continente": "Europa",
+"region": "Europa del este",
+"alias_capital": [
+"Chisinau",
+"Kishinev"
+]
+},
+{
+"codigo": "MN",
+"pais": "Mongolia",
+"capital": "Ulán Bator",
+"bandera": "🇲🇳",
+"continente": "Asia",
+"region": "Asia oriental"
+},
+{
+"codigo": "ME",
+"pais": "Montenegro",
+"capital": "Podgorica",
+"bandera": "🇲🇪",
+"continente": "Europa",
+"region": "Europa del sureste"
+},
+{
+"codigo": "MZ",
+"pais": "Mozambique",
+"capital": "Maputo",
+"bandera": "🇲🇿",
+"continente": "África",
+"region": "África oriental"
+},
+{
+"codigo": "MX",
+"pais": "México",
+"capital": "Ciudad de México",
+"bandera": "🇲🇽",
+"continente": "América",
+"region": "Norteamérica"
+},
+{
+"codigo": "MC",
+"pais": "Mónaco",
+"capital": "Mónaco",
+"bandera": "🇲🇨",
+"continente": "Europa",
+"region": "Europa occidental"
+},
+{
+"codigo": "NA",
+"pais": "Namibia",
+"capital": "Windhoek",
+"bandera": "🇳🇦",
+"continente": "África",
+"region": "África austral"
+},
+{
+"codigo": "NR",
+"pais": "Nauru",
+"capital": "Yaren",
+"bandera": "🇳🇷",
+"continente": "Oceanía",
+"region": "Micronesia"
+},
+{
+"codigo": "NP",
+"pais": "Nepal",
+"capital": "Katmandú",
+"bandera": "🇳🇵",
+"continente": "Asia",
+"region": "Asia del sur"
+},
+{
+"codigo": "NI",
+"pais": "Nicaragua",
+"capital": "Managua",
+"bandera": "🇳🇮",
+"continente": "América",
+"region": "Centroamérica"
+},
+{
+"codigo": "NG",
+"pais": "Nigeria",
+"capital": "Abuya",
+"bandera": "🇳🇬",
+"continente": "África",
+"region": "África occidental"
+},
+{
+"codigo": "NO",
+"pais": "Noruega",
+"capital": "Oslo",
+"bandera": "🇳🇴",
+"continente": "Europa",
+"region": "Europa del norte"
+},
+{
+"codigo": "NZ",
+"pais": "Nueva Zelanda",
+"capital": "Wellington",
+"bandera": "🇳🇿",
+"continente": "Oceanía",
+"region": "Australia y Nueva Zelanda"
+},
+{
+"codigo": "NE",
+"pais": "Níger",
+"capital": "Niamey",
+"bandera": "🇳🇪",
+"continente": "África",
+"region": "África occidental"
+},
+{
+"codigo": "OM",
+"pais": "Omán",
+"capital": "Mascate",
+"bandera": "🇴🇲",
+"continente": "Asia",
+"region": "Asia occidental"
+},
+{
+"codigo": "PK",
+"pais": "Pakistán",
+"capital": "Islamabad",
+"bandera": "🇵🇰",
+"continente": "Asia",
+"region": "Asia del sur"
+},
+{
+"codigo": "PW",
+"pais": "Palaos",
+"capital": "Ngerulmud",
+"bandera": "🇵🇼",
+"continente": "Oceanía",
+"region": "Micronesia"
+},
+{
+"codigo": "PS",
+"pais": "Palestina",
+"capital": "Ramala",
+"bandera": "🇵🇸",
+"continente": "Asia",
+"region": "Asia occidental",
+"nota": "Ramala es la sede administrativa; Palestina reclama Jerusalén Este como capital."
+},
+{
+"codigo": "PA",
+"pais": "Panamá",
+"capital": "Ciudad de Panamá",
+"bandera": "🇵🇦",
+"continente": "América",
+"region": "Centroamérica"
+},
+{
+"codigo": "PG",
+"pais": "Papúa Nueva Guinea",
+"capital": "Puerto Moresby",
+"bandera": "🇵🇬",
+"continente": "Oceanía",
+"region": "Melanesia"
+},
+{
+"codigo": "PY",
+"pais": "Paraguay",
+"capital": "Asunción",
+"bandera": "🇵🇾",
+"continente": "América",
+"region": "Sudamérica"
+},
+{
+"codigo": "NL",
+"pais": "Países Bajos",
+"capital": "Ámsterdam",
+"bandera": "🇳🇱",
+"continente": "Europa",
+"region": "Europa occidental",
+"alias_pais": [
+"Holanda"
+],
+"alias_capital": [
+"La Haya"
+],
+"nota": "Ámsterdam es la capital; el gobierno y la Corte están en La Haya."
+},
+{
+"codigo": "PE",
+"pais": "Perú",
+"capital": "Lima",
+"bandera": "🇵🇪",
+"continente": "América",
+"region": "Sudamérica"
+},
+{
+"codigo": "PL",
+"pais": "Polonia",
+"capital": "Varsovia",
+"bandera": "🇵🇱",
+"continente": "Europa",
+"region": "Europa central"
+},
+{
+"codigo": "PT",
+"pais": "Portugal",
+"capital": "Lisboa",
+"bandera": "🇵🇹",
+"continente": "Europa",
+"region": "Europa del sur"
+},
+{
+"codigo": "GB",
+"pais": "Reino Unido",
+"capital": "Londres",
+"bandera": "🇬🇧",
+"continente": "Europa",
+"region": "Europa del norte",
+"alias_pais": [
+"Gran Bretaña",
+"Inglaterra"
+]
+},
+{
+"codigo": "CF",
+"pais": "República Centroafricana",
+"capital": "Bangui",
+"bandera": "🇨🇫",
+"continente": "África",
+"region": "África central"
+},
+{
+"codigo": "CZ",
+"pais": "República Checa",
+"capital": "Praga",
+"bandera": "🇨🇿",
+"continente": "Europa",
+"region": "Europa central",
+"alias_pais": [
+"Chequia"
+],
+"nota": "República Checa o Chequia; ambas son oficiales en español."
+},
+{
+"codigo": "CD",
+"pais": "República Democrática del Congo",
+"capital": "Kinsasa",
+"bandera": "🇨🇩",
+"continente": "África",
+"region": "África central",
+"alias_pais": [
+"Congo (RDC)",
+"Zaire"
+]
+},
+{
+"codigo": "DO",
+"pais": "República Dominicana",
+"capital": "Santo Domingo",
+"bandera": "🇩🇴",
+"continente": "América",
+"region": "Caribe",
+"alias_pais": [
+"Dominicana"
+]
+},
+{
+"codigo": "CG",
+"pais": "República del Congo",
+"capital": "Brazzaville",
+"bandera": "🇨🇬",
+"continente": "África",
+"region": "África central"
+},
+{
+"codigo": "RW",
+"pais": "Ruanda",
+"capital": "Kigali",
+"bandera": "🇷🇼",
+"continente": "África",
+"region": "África oriental"
+},
+{
+"codigo": "RO",
+"pais": "Rumania",
+"capital": "Bucarest",
+"bandera": "🇷🇴",
+"continente": "Europa",
+"region": "Europa del sureste",
+"alias_pais": [
+"Rumanía"
+]
+},
+{
+"codigo": "RU",
+"pais": "Rusia",
+"capital": "Moscú",
+"bandera": "🇷🇺",
+"continente": "Europa",
+"region": "Europa del este"
+},
+{
+"codigo": "WS",
+"pais": "Samoa",
+"capital": "Apia",
+"bandera": "🇼🇸",
+"continente": "Oceanía",
+"region": "Polinesia"
+},
+{
+"codigo": "KN",
+"pais": "San Cristóbal y Nieves",
+"capital": "Basseterre",
+"bandera": "🇰🇳",
+"continente": "América",
+"region": "Caribe"
+},
+{
+"codigo": "SM",
+"pais": "San Marino",
+"capital": "San Marino",
+"bandera": "🇸🇲",
+"continente": "Europa",
+"region": "Europa del sur",
+"alias_capital": [
+"Ciudad de San Marino"
+]
+},
+{
+"codigo": "VC",
+"pais": "San Vicente y las Granadinas",
+"capital": "Kingstown",
+"bandera": "🇻🇨",
+"continente": "América",
+"region": "Caribe"
+},
+{
+"codigo": "LC",
+"pais": "Santa Lucía",
+"capital": "Castries",
+"bandera": "🇱🇨",
+"continente": "América",
+"region": "Caribe"
+},
+{
+"codigo": "ST",
+"pais": "Santo Tomé y Príncipe",
+"capital": "Santo Tomé",
+"bandera": "🇸🇹",
+"continente": "África",
+"region": "África central"
+},
+{
+"codigo": "SN",
+"pais": "Senegal",
+"capital": "Dakar",
+"bandera": "🇸🇳",
+"continente": "África",
+"region": "África occidental"
+},
+{
+"codigo": "RS",
+"pais": "Serbia",
+"capital": "Belgrado",
+"bandera": "🇷🇸",
+"continente": "Europa",
+"region": "Europa del sureste"
+},
+{
+"codigo": "SC",
+"pais": "Seychelles",
+"capital": "Victoria",
+"bandera": "🇸🇨",
+"continente": "África",
+"region": "África oriental"
+},
+{
+"codigo": "SL",
+"pais": "Sierra Leona",
+"capital": "Freetown",
+"bandera": "🇸🇱",
+"continente": "África",
+"region": "África occidental"
+},
+{
+"codigo": "SG",
+"pais": "Singapur",
+"capital": "Singapur",
+"bandera": "🇸🇬",
+"continente": "Asia",
+"region": "Sudeste asiático"
+},
+{
+"codigo": "SY",
+"pais": "Siria",
+"capital": "Damasco",
+"bandera": "🇸🇾",
+"continente": "Asia",
+"region": "Asia occidental"
+},
+{
+"codigo": "SO",
+"pais": "Somalia",
+"capital": "Mogadiscio",
+"bandera": "🇸🇴",
+"continente": "África",
+"region": "África oriental"
+},
+{
+"codigo": "LK",
+"pais": "Sri Lanka",
+"capital": "Sri Jayawardenapura Kotte",
+"bandera": "🇱🇰",
+"continente": "Asia",
+"region": "Asia del sur",
+"alias_capital": [
+"Colombo",
+"Kotte"
+],
+"nota": "Sri Jayawardenapura Kotte es la capital oficial; Colombo es la capital comercial."
+},
+{
+"codigo": "ZA",
+"pais": "Sudáfrica",
+"capital": "Pretoria",
+"bandera": "🇿🇦",
+"continente": "África",
+"region": "África austral",
+"alias_capital": [
+"Ciudad del Cabo",
+"Bloemfontein",
+"Cape Town"
+],
+"nota": "Tres capitales: Pretoria (ejecutiva), Ciudad del Cabo (legislativa) y Bloemfontein (judicial)."
+},
+{
+"codigo": "SD",
+"pais": "Sudán",
+"capital": "Jartum",
+"bandera": "🇸🇩",
+"continente": "África",
+"region": "Norte de África"
+},
+{
+"codigo": "SS",
+"pais": "Sudán del Sur",
+"capital": "Yuba",
+"bandera": "🇸🇸",
+"continente": "África",
+"region": "África central"
+},
+{
+"codigo": "SE",
+"pais": "Suecia",
+"capital": "Estocolmo",
+"bandera": "🇸🇪",
+"continente": "Europa",
+"region": "Europa del norte"
+},
+{
+"codigo": "CH",
+"pais": "Suiza",
+"capital": "Berna",
+"bandera": "🇨🇭",
+"continente": "Europa",
+"region": "Europa occidental"
+},
+{
+"codigo": "SR",
+"pais": "Surinam",
+"capital": "Paramaribo",
+"bandera": "🇸🇷",
+"continente": "América",
+"region": "Sudamérica"
+},
+{
+"codigo": "TH",
+"pais": "Tailandia",
+"capital": "Bangkok",
+"bandera": "🇹🇭",
+"continente": "Asia",
+"region": "Sudeste asiático"
+},
+{
+"codigo": "TZ",
+"pais": "Tanzania",
+"capital": "Dodoma",
+"bandera": "🇹🇿",
+"continente": "África",
+"region": "África oriental",
+"alias_capital": [
+"Dar es Salaam"
+],
+"nota": "Dodoma es la capital desde 1996; Dar es Salaam fue la anterior."
+},
+{
+"codigo": "TJ",
+"pais": "Tayikistán",
+"capital": "Dusambé",
+"bandera": "🇹🇯",
+"continente": "Asia",
+"region": "Asia central"
+},
+{
+"codigo": "TL",
+"pais": "Timor Oriental",
+"capital": "Dili",
+"bandera": "🇹🇱",
+"continente": "Asia",
+"region": "Sudeste asiático",
+"alias_pais": [
+"Timor-Leste"
+]
+},
+{
+"codigo": "TG",
+"pais": "Togo",
+"capital": "Lomé",
+"bandera": "🇹🇬",
+"continente": "África",
+"region": "África occidental"
+},
+{
+"codigo": "TO",
+"pais": "Tonga",
+"capital": "Nukualofa",
+"bandera": "🇹🇴",
+"continente": "Oceanía",
+"region": "Polinesia",
+"alias_capital": [
+"Nuku'alofa"
+]
+},
+{
+"codigo": "TT",
+"pais": "Trinidad y Tobago",
+"capital": "Puerto España",
+"bandera": "🇹🇹",
+"continente": "América",
+"region": "Caribe",
+"alias_capital": [
+"Port of Spain"
+]
+},
+{
+"codigo": "TM",
+"pais": "Turkmenistán",
+"capital": "Asjabad",
+"bandera": "🇹🇲",
+"continente": "Asia",
+"region": "Asia central"
+},
+{
+"codigo": "TR",
+"pais": "Turquía",
+"capital": "Ankara",
+"bandera": "🇹🇷",
+"continente": "Asia",
+"region": "Asia occidental",
+"alias_pais": [
+"Türkiye"
+]
+},
+{
+"codigo": "TV",
+"pais": "Tuvalu",
+"capital": "Funafuti",
+"bandera": "🇹🇻",
+"continente": "Oceanía",
+"region": "Polinesia"
+},
+{
+"codigo": "TN",
+"pais": "Túnez",
+"capital": "Túnez",
+"bandera": "🇹🇳",
+"continente": "África",
+"region": "Norte de África"
+},
+{
+"codigo": "UA",
+"pais": "Ucrania",
+"capital": "Kiev",
+"bandera": "🇺🇦",
+"continente": "Europa",
+"region": "Europa del este",
+"alias_capital": [
+"Kyiv"
+],
+"nota": "Kiev (Kyiv en transliteración del ucraniano)."
+},
+{
+"codigo": "UG",
+"pais": "Uganda",
+"capital": "Kampala",
+"bandera": "🇺🇬",
+"continente": "África",
+"region": "África oriental"
+},
+{
+"codigo": "UY",
+"pais": "Uruguay",
+"capital": "Montevideo",
+"bandera": "🇺🇾",
+"continente": "América",
+"region": "Sudamérica"
+},
+{
+"codigo": "UZ",
+"pais": "Uzbekistán",
+"capital": "Taskent",
+"bandera": "🇺🇿",
+"continente": "Asia",
+"region": "Asia central"
+},
+{
+"codigo": "VU",
+"pais": "Vanuatu",
+"capital": "Port Vila",
+"bandera": "🇻🇺",
+"continente": "Oceanía",
+"region": "Melanesia"
+},
+{
+"codigo": "VE",
+"pais": "Venezuela",
+"capital": "Caracas",
+"bandera": "🇻🇪",
+"continente": "América",
+"region": "Sudamérica"
+},
+{
+"codigo": "VN",
+"pais": "Vietnam",
+"capital": "Hanói",
+"bandera": "🇻🇳",
+"continente": "Asia",
+"region": "Sudeste asiático",
+"alias_capital": [
+"Hanoi"
+]
+},
+{
+"codigo": "YE",
+"pais": "Yemen",
+"capital": "Saná",
+"bandera": "🇾🇪",
+"continente": "Asia",
+"region": "Asia occidental",
+"alias_capital": [
+"Adén"
+],
+"nota": "Saná es la capital oficial; Adén es sede del gobierno reconocido desde 2015."
+},
+{
+"codigo": "DJ",
+"pais": "Yibuti",
+"capital": "Ciudad de Yibuti",
+"bandera": "🇩🇯",
+"continente": "África",
+"region": "África oriental",
+"alias_capital": [
+"Yibuti",
+"Djibouti"
+]
+},
+{
+"codigo": "ZM",
+"pais": "Zambia",
+"capital": "Lusaka",
+"bandera": "🇿🇲",
+"continente": "África",
+"region": "África oriental"
+},
+{
+"codigo": "ZW",
+"pais": "Zimbabue",
+"capital": "Harare",
+"bandera": "🇿🇼",
+"continente": "África",
+"region": "África oriental"
+}
+]
