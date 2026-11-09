@@ -1,25 +1,25 @@
 #!/usr/bin/env python3
-"""Arma las dos salidas a partir de _plantilla.html y datos/paises.json.
+"""Arma las dos salidas a partir de _plantilla.html y la carpeta datos/.
 
   pagina.html  contenido suelto, para publicar como artifact de Claude
   index.html   archivo completo y autónomo, es el que vive en GitHub Pages
+
+Los datos van incrustados a propósito: así la app abre desde file:// y sin red.
 """
 import json, pathlib
 
 aqui = pathlib.Path(__file__).parent
 paises = json.loads((aqui / "datos" / "paises.json").read_text(encoding="utf-8"))
+mapa = json.loads((aqui / "datos" / "mapa.json").read_text(encoding="utf-8"))
 
-filas = []
-for r in paises:
-    filas.append(json.dumps(
-        [r["codigo"], r["pais"], r["capital"], r["continente"], r["region"],
-         r.get("alias_pais", []), r.get("alias_capital", []), r.get("nota", "")],
-        ensure_ascii=False))
-datos = "const DATOS = [\n" + ",\n".join(filas) + "\n];"
+bloque = (
+    "const PAISES_CRUDO = " + json.dumps(paises, ensure_ascii=False, separators=(",", ":")) + ";\n"
+    "const MAPA = " + json.dumps(mapa, ensure_ascii=False, separators=(",", ":")) + ";"
+)
 
 plantilla = (aqui / "_plantilla.html").read_text(encoding="utf-8")
 assert "/*__DATOS__*/" in plantilla, "falta el marcador de datos en la plantilla"
-pagina = plantilla.replace("/*__DATOS__*/", datos)
+pagina = plantilla.replace("/*__DATOS__*/", bloque)
 (aqui / "pagina.html").write_text(pagina, encoding="utf-8")
 
 # El artifact de Claude inyecta su propio esqueleto; el archivo de GitHub lo
@@ -48,6 +48,9 @@ cabeza, cuerpo = pagina[:corte], pagina[corte:]
 completo = envoltura.replace("__CONTENIDO__", cabeza.strip()).replace("__CUERPO__", cuerpo.strip())
 (aqui / "index.html").write_text(completo, encoding="utf-8")
 
-print("pagina.html", len(pagina), "bytes")
-print("index.html ", len(completo), "bytes")
-print("paises     ", len(paises))
+fotos = len(list((aqui / "fotos").glob("*.jpg"))) if (aqui / "fotos").exists() else 0
+print("países    ", len(paises))
+print("contornos ", len(mapa["paises"]))
+print("fotos     ", fotos)
+print("pagina.html", f"{len(pagina.encode()):,}", "bytes")
+print("index.html ", f"{len(completo.encode()):,}", "bytes")

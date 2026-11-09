@@ -16,6 +16,7 @@
   --tierra: #2b7d5c;    /* acierto */
   --coral: #ab4027;     /* error */
   --oro: #8a6a1f;       /* notas al pie */
+  --relieve: #dde4e8;   /* los países que solo hacen de contexto en el mapa */
   --f-titulo: "Bricolage Grotesque", "Helvetica Neue", Helvetica, sans-serif;
   --f-texto: "Spectral", Georgia, "Times New Roman", serif;
   --f-dato: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
@@ -25,13 +26,13 @@
   :root:not([data-theme="light"]) {
     --papel: #0e1518; --hoja: #162026; --tinta: #e7eef1; --tenue: #93a4ad;
     --linea: #253439; --agua: #5bbfd6; --tierra: #5cbd8d; --coral: #e37f66;
-    --oro: #d5b45e; color-scheme: dark;
+    --oro: #d5b45e; --relieve: #1e2b31; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --papel: #0e1518; --hoja: #162026; --tinta: #e7eef1; --tenue: #93a4ad;
   --linea: #253439; --agua: #5bbfd6; --tierra: #5cbd8d; --coral: #e37f66;
-  --oro: #d5b45e; color-scheme: dark;
+  --oro: #d5b45e; --relieve: #1e2b31; color-scheme: dark;
 }
 * { box-sizing: border-box; }
 body {
@@ -40,7 +41,7 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 .marco {
-  max-width: 44rem; margin: 0 auto;
+  max-width: 46rem; margin: 0 auto;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 0 3rem;
@@ -48,7 +49,12 @@ body {
 h1, h2, h3 { font-family: var(--f-titulo); margin: 0; text-wrap: balance; line-height: 1.12; }
 p { margin: 0; }
 button { font: inherit; color: inherit; cursor: pointer; }
+a { color: var(--agua); }
 .oculto { display: none !important; }
+.rotulo {
+  font-family: var(--f-dato); font-size: .72rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--agua);
+}
 
 /* ---------- barra de instrumentos ---------- */
 body::before {
@@ -92,10 +98,7 @@ body::before {
   -webkit-mask-image: radial-gradient(ellipse at 78% 18%, #000 0%, transparent 72%);
 }
 .portada > * { position: relative; }
-.rotulo {
-  font-family: var(--f-dato); font-size: .72rem; letter-spacing: .18em;
-  text-transform: uppercase; color: var(--agua); margin-bottom: .6rem;
-}
+.portada .rotulo { display: block; margin-bottom: .6rem; }
 .portada h1 { font-size: clamp(2.1rem, 9vw, 3.4rem); font-weight: 800; letter-spacing: -.02em; }
 .portada .lema { font-style: italic; color: var(--tenue); margin-top: .7rem; max-width: 32rem; }
 .cifras { display: flex; gap: 1.6rem; flex-wrap: wrap; margin-top: 1.3rem;
@@ -124,6 +127,7 @@ legend {
   font-weight: 600; font-size: 1rem; letter-spacing: .01em;
 }
 .btn.sec { background: none; color: var(--tinta); border-color: var(--linea); }
+.btn.chico { padding: .4rem .8rem; font-size: .88rem; }
 .btn:disabled { opacity: .45; cursor: not-allowed; }
 .nota-pie {
   font-size: .85rem; color: var(--tenue); margin-top: 1.4rem;
@@ -140,7 +144,6 @@ legend {
   font-family: var(--f-bandera); font-size: clamp(4.5rem, 24vw, 7.5rem);
   line-height: 1.1; display: block; margin: .4rem 0 .2rem; text-align: center;
 }
-.sinbandera { font-size: .8rem; color: var(--tenue); text-align: center; font-family: var(--f-dato); }
 .sujeto {
   font-family: var(--f-titulo); font-weight: 800; letter-spacing: -.015em;
   font-size: clamp(1.8rem, 7.5vw, 2.9rem); margin: .45rem 0 .1rem; text-wrap: balance;
@@ -193,23 +196,81 @@ legend {
 .lista-errores .bnd { font-family: var(--f-bandera); font-size: 1.2rem; flex: none; }
 .lista-errores .tuya { color: var(--coral); font-size: .85rem; }
 
-/* ---------- estudio ---------- */
+/* ---------- mapas ---------- */
+.mapa { display: block; width: 100%; height: auto; max-width: 100%; }
+.mapa .fondo { fill: var(--relieve); stroke: var(--papel); stroke-width: .6; }
+.mapa .zona   { fill: color-mix(in srgb, var(--agua) 22%, var(--relieve)); stroke: var(--papel); stroke-width: .6; }
+.mapa .foco   { fill: var(--agua); stroke: var(--hoja); stroke-width: .8; }
+.mapa .halo   { fill: none; stroke: var(--coral); stroke-width: 1.6; opacity: .85; }
+.mapa .punto  { fill: var(--coral); stroke: var(--hoja); stroke-width: .8; }
+.mapa .tocable { fill: transparent; cursor: pointer; }
+.mapa .tocable:hover + .capa-nombre, .mapa .tocable:focus-visible + .capa-nombre { opacity: 1; }
+
+/* ---------- explorar ---------- */
+.continentes { display: grid; gap: .7rem; margin-top: 1.2rem; }
+@media (min-width: 30rem) { .continentes { grid-template-columns: 1fr 1fr; } }
+.tarjeta-cont {
+  display: grid; grid-template-columns: 5.5rem 1fr; align-items: center; gap: .9rem;
+  background: var(--hoja); border: 1px solid var(--linea); border-radius: 2px;
+  padding: .8rem .9rem; text-align: left; min-width: 0;
+}
+.tarjeta-cont:hover { border-color: var(--agua); }
+.tarjeta-cont .nom { font-family: var(--f-titulo); font-weight: 600; font-size: 1.1rem; }
+.tarjeta-cont .sub { font-family: var(--f-dato); font-size: .72rem; color: var(--tenue); letter-spacing: .05em; }
+.tarjeta-cont svg { width: 100%; height: 3.4rem; }
 .buscador {
   width: 100%; font: inherit; color: var(--tinta); background: var(--hoja);
   border: 1px solid var(--linea); border-radius: 2px; padding: .7rem .8rem; margin-top: 1rem;
 }
 .buscador:focus-visible { outline: 2px solid var(--agua); outline-offset: 1px; }
-.tabla { margin-top: 1rem; border-top: 1px solid var(--linea); }
-.tabla .reg {
-  display: grid; grid-template-columns: 2rem 1fr; gap: .2rem .7rem;
-  border-bottom: 1px solid var(--linea); padding: .6rem 0; min-width: 0;
+.lienzo { background: var(--hoja); border: 1px solid var(--linea); padding: .9rem; margin-top: 1rem; }
+.listado { margin-top: 1rem; border-top: 1px solid var(--linea); }
+.listado .reg {
+  display: grid; grid-template-columns: 2rem 1fr auto; gap: .15rem .7rem; width: 100%;
+  border: 0; border-bottom: 1px solid var(--linea); background: none;
+  padding: .6rem .1rem; text-align: left; align-items: center; min-width: 0;
 }
-.tabla .bnd { font-family: var(--f-bandera); font-size: 1.35rem; grid-row: 1 / span 2; }
-.tabla .pais { font-family: var(--f-titulo); font-weight: 600; }
-.tabla .cap { color: var(--tenue); font-size: .9rem; }
-.tabla .cap span { font-family: var(--f-dato); font-size: .68rem; letter-spacing: .1em;
-  text-transform: uppercase; color: var(--agua); margin-right: .4rem; }
-.tabla .reg .apunte { grid-column: 2; margin-top: .3rem; font-size: .82rem; }
+.listado .reg:hover { background: color-mix(in srgb, var(--agua) 7%, transparent); }
+.listado .bnd { font-family: var(--f-bandera); font-size: 1.35rem; grid-column: 1; grid-row: 1 / span 2; }
+.listado .pais { font-family: var(--f-titulo); font-weight: 600; grid-column: 2; grid-row: 1; justify-self: start; }
+.listado .cap { color: var(--tenue); font-size: .88rem; grid-column: 2; grid-row: 2; justify-self: start; }
+.listado .flecha { grid-column: 3; grid-row: 1 / span 2; justify-self: end;
+  color: var(--tenue); font-family: var(--f-dato); }
+
+/* ---------- ficha ---------- */
+.ficha { background: var(--hoja); border: 1px solid var(--linea); margin-top: 1rem; }
+.ficha-cabeza {
+  display: grid; grid-template-columns: auto 1fr; gap: .4rem 1.1rem; align-items: center;
+  padding: 1.4rem 1.2rem 1.2rem; border-bottom: 1px solid var(--linea); min-width: 0;
+}
+.ficha-cabeza .bnd { font-family: var(--f-bandera); font-size: clamp(3rem, 14vw, 4.2rem); line-height: 1; grid-row: 1 / span 2; }
+.ficha-cabeza h2 { font-size: clamp(1.6rem, 6.5vw, 2.3rem); font-weight: 800; letter-spacing: -.015em; }
+.ficha-cabeza .cap { font-family: var(--f-dato); font-size: .8rem; color: var(--tenue); }
+.ficha-cabeza .cap b { color: var(--agua); font-weight: 600; }
+.ficha-mapa { padding: 1rem 1.2rem 0; }
+.pie-mapa { font-family: var(--f-dato); font-size: .7rem; color: var(--tenue); margin-top: .4rem; letter-spacing: .04em; }
+.datos { display: grid; gap: 0; padding: 1rem 1.2rem 1.2rem; }
+.dato { display: grid; grid-template-columns: 8.5rem 1fr; gap: .2rem .9rem; padding: .6rem 0; border-bottom: 1px solid var(--linea); min-width: 0; }
+.dato:last-child { border-bottom: 0; }
+.dato dt { font-family: var(--f-dato); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--tenue); padding-top: .2rem; }
+.dato dd { margin: 0; min-width: 0; }
+.dato .cifra { font-family: var(--f-dato); font-variant-numeric: tabular-nums; }
+.dato .menor { display: block; font-size: .8rem; color: var(--tenue); font-family: var(--f-dato); }
+@media (max-width: 26rem) { .dato { grid-template-columns: 1fr; } }
+.gobernantes { border-top: 1px solid var(--linea); padding: 1.2rem; display: grid; gap: 1.2rem; }
+.gobernante { display: grid; grid-template-columns: 4.6rem 1fr; gap: .9rem; min-width: 0; }
+.gobernante img { width: 4.6rem; height: 5.6rem; object-fit: cover; border: 1px solid var(--linea); background: var(--relieve); }
+.gobernante .sinfoto {
+  width: 4.6rem; height: 5.6rem; display: grid; place-items: center; border: 1px solid var(--linea);
+  background: var(--relieve); font-family: var(--f-titulo); font-weight: 600; font-size: 1.4rem; color: var(--tenue);
+}
+.gobernante .quien { font-family: var(--f-titulo); font-weight: 600; font-size: 1.05rem; }
+.gobernante .cargo { font-family: var(--f-dato); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--agua); }
+.gobernante .bio { font-size: .92rem; margin-top: .35rem; }
+.gobernante .credito { font-family: var(--f-dato); font-size: .64rem; color: var(--tenue); margin-top: .4rem; }
+.migas { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; margin-top: 1rem;
+  font-family: var(--f-dato); font-size: .74rem; color: var(--tenue); }
+.migas button { background: none; border: 0; padding: 0; color: var(--agua); text-decoration: underline; }
 
 /* ---------- progreso ---------- */
 .medidores { display: grid; gap: .8rem; margin-top: 1.2rem; }
@@ -235,14 +296,14 @@ legend {
 
   <nav class="pestanas" id="pestanas" aria-label="Secciones">
     <button type="button" data-ir="inicio" aria-current="true">Examen</button>
-    <button type="button" data-ir="estudio">Estudiar</button>
+    <button type="button" data-ir="explorar">Explorar</button>
     <button type="button" data-ir="progreso">Mi progreso</button>
   </nav>
 
   <!-- ================= INICIO ================= -->
   <section id="p-inicio">
     <div class="portada">
-      <p class="rotulo">195 países · 5 continentes</p>
+      <span class="rotulo">195 países · 5 continentes</span>
       <h1>Capitales del Mundo</h1>
       <p class="lema">Banderas, países y capitales. Eliges el modo y el continente, la app
         te califica y te deja repasar exactamente lo que fallaste.</p>
@@ -299,7 +360,7 @@ legend {
   <!-- ================= BOLETA ================= -->
   <section id="p-final" class="oculto">
     <div class="boleta">
-      <p class="rotulo" id="final-rotulo">Resultado</p>
+      <span class="rotulo" id="final-rotulo">Resultado</span>
       <p class="calificacion" id="final-calif">—</p>
       <div class="desglose">
         <div><b id="final-aciertos">0</b>aciertos</div>
@@ -316,13 +377,41 @@ legend {
     </div>
   </section>
 
-  <!-- ================= ESTUDIO ================= -->
-  <section id="p-estudio" class="oculto">
-    <h2 style="font-size:1.4rem;margin-top:.6rem">Los 195, de corrido</h2>
-    <p style="color:var(--tenue);margin-top:.4rem">Busca por país, capital o continente.</p>
-    <input type="search" class="buscador" id="busca" placeholder="Nauru, Dodoma, Oceanía…" aria-label="Buscar">
-    <p class="rotulo" id="cuenta-estudio" style="margin-top:.9rem"></p>
-    <div class="tabla" id="tabla"></div>
+  <!-- ================= EXPLORAR ================= -->
+  <section id="p-explorar" class="oculto">
+    <h2 style="font-size:1.4rem;margin-top:.6rem">Los 195, por continente</h2>
+    <p style="color:var(--tenue);margin-top:.4rem">Entra a un continente para ver el mapa y
+      la ficha de cada país, o busca uno directo.</p>
+    <input type="search" class="buscador" id="busca" placeholder="Nauru, Dodoma, peso, monarquía…"
+           aria-label="Buscar país o capital">
+    <div class="continentes" id="continentes"></div>
+    <div class="listado oculto" id="resultados"></div>
+  </section>
+
+  <!-- ================= CONTINENTE ================= -->
+  <section id="p-continente" class="oculto">
+    <div class="migas">
+      <button type="button" data-ir="explorar">Explorar</button><span>›</span>
+      <span id="miga-cont"></span>
+    </div>
+    <h2 id="cont-titulo" style="font-size:1.5rem;margin-top:.5rem"></h2>
+    <p id="cont-sub" style="color:var(--tenue);margin-top:.35rem"></p>
+    <div class="lienzo"><div id="cont-mapa"></div></div>
+    <div class="listado" id="cont-lista"></div>
+  </section>
+
+  <!-- ================= FICHA ================= -->
+  <section id="p-ficha" class="oculto">
+    <div class="migas">
+      <button type="button" data-ir="explorar">Explorar</button><span>›</span>
+      <button type="button" id="miga-volver-cont"></button><span>›</span>
+      <span id="miga-pais"></span>
+    </div>
+    <div class="ficha" id="ficha"></div>
+    <div class="acciones">
+      <button type="button" class="btn sec" id="btn-ficha-anterior">‹ Anterior</button>
+      <button type="button" class="btn sec" id="btn-ficha-siguiente">Siguiente ›</button>
+    </div>
   </section>
 
   <!-- ================= PROGRESO ================= -->
@@ -342,12 +431,14 @@ legend {
 <script>
 /*__DATOS__*/
 
-const PAISES = DATOS.map(function (f) {
-  return {
-    codigo: f[0], pais: f[1], capital: f[2], continente: f[3], region: f[4],
-    aliasPais: f[5] || [], aliasCapital: f[6] || [], nota: f[7] || ""
-  };
+const PAISES = PAISES_CRUDO.map(function (p) {
+  p.aliasPais = p.alias_pais || [];
+  p.aliasCapital = p.alias_capital || [];
+  p.nota = p.nota || "";
+  return p;
 });
+const PORCODIGO = {};
+PAISES.forEach(function (p) { PORCODIGO[p.codigo] = p; });
 
 const CONTINENTES = ["África", "América", "Asia", "Europa", "Oceanía"];
 
@@ -359,13 +450,11 @@ const MODOS = [
   { id: "escribe-capital", etiqueta: "Escribir la capital", muestra: "pais",  pide: "capital", escribir: true },
   { id: "mixto",           etiqueta: "Mixto",             mezcla: true }
 ];
-
 const CANTIDADES = [10, 20, 40, 0];
 
 // ---------- utilidades ----------
 function normaliza(s) {
-  return (s || "")
-    .normalize("NFD").replace(/[̀-ͯ]/g, "")
+  return (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "")
     .toLowerCase().replace(/[^a-z0-9]/g, "");
 }
 function distancia(a, b) {
@@ -397,6 +486,158 @@ function reloj(ms) {
   return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
 }
 function $(id) { return document.getElementById(id); }
+const MILES = new Intl.NumberFormat("es-MX");
+function cifra(n) { return MILES.format(n); }
+function millones(n) {
+  if (n >= 1e6) return (n / 1e6).toFixed(n >= 1e7 ? 0 : 1).replace(".", ",") + " millones";
+  if (n >= 1e3) return (n / 1e3).toFixed(0) + " mil";
+  return cifra(n);
+}
+function grados(lat, lon) {
+  const a = Math.abs(lat).toFixed(1).replace(".", ",") + "° " + (lat >= 0 ? "N" : "S");
+  const b = Math.abs(lon).toFixed(1).replace(".", ",") + "° " + (lon >= 0 ? "E" : "O");
+  return a + ", " + b;
+}
+function fecha(iso) {
+  if (!iso) return null;
+  const partes = iso.split("-");
+  const meses = ["enero","febrero","marzo","abril","mayo","junio","julio",
+                 "agosto","septiembre","octubre","noviembre","diciembre"];
+  if (partes.length < 3) return partes[0];
+  return Number(partes[2]) + " de " + meses[Number(partes[1]) - 1] + " de " + partes[0];
+}
+
+// ================= MAPAS =================
+// Proyección equirectangular con la x comprimida por el coseno de la latitud
+// media del recuadro: a escala de un continente se parece bastante a un atlas
+// y no estira los polos como lo haría Mercator.
+function recuadro(codigos) {
+  let puntos = [];
+  codigos.forEach(function (c) {
+    const polis = MAPA.paises[c];
+    if (polis) polis.forEach(function (anillo) { puntos = puntos.concat(anillo); });
+    else {
+      const p = PORCODIGO[c];
+      if (p && p.latlng) puntos.push([p.latlng[1], p.latlng[0]]);
+    }
+  });
+  if (!puntos.length) return { oeste: -180, este: 180, sur: -60, norte: 85, corre: false };
+  function extremos(corre) {
+    let o = 1e9, e = -1e9, s = 1e9, n = -1e9;
+    puntos.forEach(function (q) {
+      let x = q[0];
+      if (corre && x < -30) x += 360;
+      if (x < o) o = x; if (x > e) e = x;
+      if (q[1] < s) s = q[1]; if (q[1] > n) n = q[1];
+    });
+    return { oeste: o, este: e, sur: s, norte: n, ancho: e - o };
+  }
+  const crudo = extremos(false), corrido = extremos(true);
+  // Oceanía y Rusia cruzan el antimeridiano: si correr los grados negativos
+  // deja un recuadro más angosto, ese es el que de verdad describe la zona.
+  const r = corrido.ancho < crudo.ancho ? corrido : crudo;
+  r.corre = corrido.ancho < crudo.ancho;
+  return r;
+}
+
+function proyeccion(r, ancho, alto, margen) {
+  const latMedia = (r.norte + r.sur) / 2 * Math.PI / 180;
+  const k = Math.max(0.25, Math.cos(latMedia));
+  const x0 = r.oeste * k, x1 = r.este * k;
+  const y0 = -r.norte, y1 = -r.sur;
+  const dx = Math.max(1e-6, x1 - x0), dy = Math.max(1e-6, y1 - y0);
+  const esc = Math.min((ancho - 2 * margen) / dx, (alto - 2 * margen) / dy);
+  const despX = (ancho - dx * esc) / 2 - x0 * esc;
+  const despY = (alto - dy * esc) / 2 - y0 * esc;
+  return {
+    x: function (lon) { let l = lon; if (r.corre && l < -30) l += 360; return l * k * esc + despX; },
+    y: function (lat) { return -lat * esc + despY; },
+    esc: esc
+  };
+}
+
+function trazo(polis, pr) {
+  let d = "";
+  polis.forEach(function (anillo) {
+    let abierto = false, previo = null;
+    for (let i = 0; i < anillo.length; i++) {
+      const q = anillo[i];
+      // un salto de más de 180° es el antimeridiano: se corta el trazo
+      if (previo && Math.abs(q[0] - previo[0]) > 180) { abierto = false; }
+      d += (abierto ? "L" : "M") + pr.x(q[0]).toFixed(1) + " " + pr.y(q[1]).toFixed(1);
+      abierto = true; previo = q;
+    }
+    d += "Z";
+  });
+  return d;
+}
+
+function dibujaMapa(opc) {
+  const ancho = opc.ancho || 600, alto = opc.alto || 320, margen = opc.margen == null ? 6 : opc.margen;
+  const r = recuadro(opc.encuadre);
+  const holgura = opc.holgura == null ? 0.08 : opc.holgura;
+  const hx = (r.este - r.oeste) * holgura, hy = (r.norte - r.sur) * holgura;
+  r.oeste -= hx; r.este += hx; r.sur -= hy; r.norte += hy;
+  const pr = proyeccion(r, ancho, alto, margen);
+
+  const ns = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", "0 0 " + ancho + " " + alto);
+  svg.setAttribute("class", "mapa");
+  svg.setAttribute("role", "img");
+  svg.setAttribute("aria-label", opc.titulo || "Mapa");
+
+  const zona = {};
+  (opc.zona || []).forEach(function (c) { zona[c] = true; });
+  const foco = {};
+  (opc.foco || []).forEach(function (c) { foco[c] = true; });
+
+  function pinta(polis, clase, codigo) {
+    const p = document.createElementNS(ns, "path");
+    p.setAttribute("d", trazo(polis, pr));
+    p.setAttribute("class", clase);
+    if (codigo) {
+      p.setAttribute("data-codigo", codigo);
+      const t = document.createElementNS(ns, "title");
+      t.textContent = PORCODIGO[codigo] ? PORCODIGO[codigo].pais : codigo;
+      p.appendChild(t);
+      if (opc.alTocar) {
+        p.style.cursor = "pointer";
+        p.addEventListener("click", function () { opc.alTocar(codigo); });
+      }
+    }
+    svg.appendChild(p);
+  }
+
+  if (opc.contexto !== false) pinta(MAPA.resto, "fondo");
+  Object.keys(MAPA.paises).forEach(function (c) {
+    if (foco[c]) return;
+    pinta(MAPA.paises[c], zona[c] ? "zona" : "fondo", zona[c] ? c : null);
+  });
+  (opc.foco || []).forEach(function (c) {
+    if (MAPA.paises[c]) pinta(MAPA.paises[c], "foco", c);
+  });
+
+  (opc.puntos || []).forEach(function (pt) {
+    const cx = pr.x(pt[1]), cy = pr.y(pt[0]);
+    const halo = document.createElementNS(ns, "circle");
+    halo.setAttribute("cx", cx.toFixed(1)); halo.setAttribute("cy", cy.toFixed(1));
+    halo.setAttribute("r", "7"); halo.setAttribute("class", "halo");
+    svg.appendChild(halo);
+    const c = document.createElementNS(ns, "circle");
+    c.setAttribute("cx", cx.toFixed(1)); c.setAttribute("cy", cy.toFixed(1));
+    c.setAttribute("r", "2.6"); c.setAttribute("class", "punto");
+    svg.appendChild(c);
+  });
+  return svg;
+}
+
+function deContinente(c) {
+  return PAISES.filter(function (p) { return p.continente === c; });
+}
+function codigosDe(c) {
+  return deContinente(c).map(function (p) { return p.codigo; });
+}
 
 // ---------- progreso guardado ----------
 const LLAVE = "capitales.progreso.v1";
@@ -405,7 +646,6 @@ try {
   const crudo = localStorage.getItem(LLAVE);
   if (crudo) progreso = JSON.parse(crudo) || {};
 } catch (e) { progreso = {}; }
-
 function guardaProgreso() {
   try { localStorage.setItem(LLAVE, JSON.stringify(progreso)); } catch (e) {}
 }
@@ -430,8 +670,9 @@ function porRepasar() {
 // ---------- estado ----------
 let elegido = { modo: "bandera-pais", ambito: "Todos", cantidad: 20 };
 let sesion = null;
+let contextoFicha = { continente: null, lista: [], i: 0 };
 
-// ---------- pintar selectores ----------
+// ---------- selectores ----------
 function chips(contenedor, items, activo, alCambiar) {
   const zona = $(contenedor);
   zona.innerHTML = "";
@@ -450,7 +691,6 @@ function chips(contenedor, items, activo, alCambiar) {
     zona.appendChild(b);
   });
 }
-
 function pintaSelectores() {
   chips("op-modo", MODOS.map(function (m) { return { etiqueta: m.etiqueta, valor: m.id }; }),
     function () { return elegido.modo; }, function (v) { elegido.modo = v; });
@@ -461,13 +701,10 @@ function pintaSelectores() {
       return { etiqueta: n === 0 ? "Todos" : String(n), valor: n };
     }), function () { return elegido.cantidad; }, function (v) { elegido.cantidad = v; });
 }
-
 function baraja() {
-  return elegido.ambito === "Todos"
-    ? PAISES.slice()
+  return elegido.ambito === "Todos" ? PAISES.slice()
     : PAISES.filter(function (p) { return p.continente === elegido.ambito; });
 }
-
 function pintaPie() {
   const n = baraja().length;
   const total = elegido.cantidad === 0 ? n : Math.min(elegido.cantidad, n);
@@ -483,60 +720,55 @@ function pintaPie() {
 }
 
 // ---------- navegación ----------
-const PANTALLAS = ["inicio", "juego", "final", "estudio", "progreso"];
+const PANTALLAS = ["inicio", "juego", "final", "explorar", "continente", "ficha", "progreso"];
 function ver(cual) {
   PANTALLAS.forEach(function (p) { $("p-" + p).classList.toggle("oculto", p !== cual); });
   $("instrumentos").classList.toggle("oculto", cual !== "juego");
   $("pestanas").classList.toggle("oculto", cual === "juego");
+  const marcado = cual === "continente" || cual === "ficha" ? "explorar" : cual;
   Array.prototype.forEach.call($("pestanas").children, function (b) {
-    const destino = b.getAttribute("data-ir");
-    b.setAttribute("aria-current", String(destino === cual));
+    b.setAttribute("aria-current", String(b.getAttribute("data-ir") === marcado));
   });
   if (cual === "inicio") pintaPie();
+  if (cual === "explorar") pintaContinentes();
   if (cual === "progreso") pintaProgreso();
   window.scrollTo(0, 0);
 }
 Array.prototype.forEach.call($("pestanas").children, function (b) {
   b.addEventListener("click", function () { ver(b.getAttribute("data-ir")); });
 });
+Array.prototype.forEach.call(document.querySelectorAll(".migas [data-ir]"), function (b) {
+  b.addEventListener("click", function () { ver(b.getAttribute("data-ir")); });
+});
 
 // ---------- armar reactivos ----------
-function modoDe(p) {
+function modoDe() {
   const m = MODOS.find(function (x) { return x.id === elegido.modo; });
   if (!m.mezcla) return m;
   const cuatro = MODOS.filter(function (x) { return !x.mezcla && !x.escribir; });
   return cuatro[Math.floor(Math.random() * cuatro.length)];
 }
-
 function textoDe(p, cual) {
   return cual === "bandera" ? p.bandera : cual === "pais" ? p.pais : p.capital;
 }
-
 function distractores(p, pide, pool) {
-  const mismos = pool.filter(function (q) {
-    return q.codigo !== p.codigo && q.continente === p.continente;
-  });
-  const resto = pool.filter(function (q) {
-    return q.codigo !== p.codigo && q.continente !== p.continente;
-  });
+  const mismos = pool.filter(function (q) { return q.codigo !== p.codigo && q.continente === p.continente; });
+  const resto = pool.filter(function (q) { return q.codigo !== p.codigo && q.continente !== p.continente; });
   const candidatos = revuelve(mismos).concat(revuelve(resto));
   const vistos = {}; vistos[normaliza(textoDe(p, pide))] = true;
   const salida = [];
   for (let i = 0; i < candidatos.length && salida.length < 3; i++) {
-    const t = textoDe(candidatos[i], pide);
-    const k = normaliza(t);
+    const k = normaliza(textoDe(candidatos[i], pide));
     if (!vistos[k]) { vistos[k] = true; salida.push(candidatos[i]); }
   }
   return salida;
 }
-
 function armaReactivo(p, pool) {
-  const m = modoDe(p);
+  const m = modoDe();
   const r = {
     pais: p, modo: m,
     enunciado: m.muestra === "bandera" ? "¿De qué país es esta bandera?"
-      : m.muestra === "pais" ? (m.pide === "capital" ? "¿Cuál es su capital?" : "")
-      : "¿De qué país es esta capital?",
+      : m.muestra === "pais" ? "¿Cuál es su capital?" : "¿De qué país es esta capital?",
     muestra: m.muestra, pide: m.pide,
     sujeto: textoDe(p, m.muestra),
     correcta: textoDe(p, m.pide),
@@ -556,13 +788,13 @@ function arranca(lista, esExamen, rotulo) {
   const pool = PAISES.slice();
   const orden = revuelve(lista);
   const total = esExamen && elegido.cantidad > 0 ? Math.min(elegido.cantidad, orden.length) : orden.length;
+  if (sesion && sesion.cronometro) clearInterval(sesion.cronometro);
   sesion = {
     reactivos: orden.slice(0, total).map(function (p) { return armaReactivo(p, pool); }),
     i: 0, aciertos: 0, errores: [], examen: esExamen, rotulo: rotulo || "Resultado",
     inicio: Date.now(), contestado: false
   };
   ver("juego");
-  if (sesion.cronometro) clearInterval(sesion.cronometro);
   sesion.cronometro = setInterval(tictac, 1000);
   pintaReactivo();
 }
@@ -570,7 +802,6 @@ function tictac() {
   if (!sesion) return;
   $("marcador-reloj").innerHTML = "<b>" + reloj(Date.now() - sesion.inicio) + "</b>";
 }
-
 function pintaReactivo() {
   const r = sesion.reactivos[sesion.i];
   sesion.contestado = false;
@@ -578,7 +809,6 @@ function pintaReactivo() {
   $("marcador-aciertos").innerHTML = "Aciertos <b>" + sesion.aciertos + "</b>";
   $("riel").style.width = (sesion.i / sesion.reactivos.length * 100) + "%";
   tictac();
-
   $("enunciado").textContent = r.enunciado;
   const zona = $("sujeto-zona");
   zona.innerHTML = "";
@@ -593,12 +823,10 @@ function pintaReactivo() {
     h.className = "sujeto"; h.textContent = r.sujeto;
     zona.appendChild(h);
   }
-
   $("veredicto").classList.add("oculto");
   $("apunte").classList.add("oculto");
   $("btn-siguiente").classList.add("oculto");
   $("btn-siguiente").textContent = sesion.i + 1 < sesion.reactivos.length ? "Siguiente" : "Ver resultado";
-
   const caja = $("respuestas");
   caja.innerHTML = "";
   if (r.escribir) {
@@ -621,7 +849,6 @@ function pintaReactivo() {
     });
   }
 }
-
 function aceptable(dicho, r) {
   const n = normaliza(dicho);
   if (!n) return false;
@@ -633,33 +860,27 @@ function aceptable(dicho, r) {
   }
   return false;
 }
-
 function contesta(dicho, boton) {
   if (sesion.contestado) return;
   sesion.contestado = true;
   const r = sesion.reactivos[sesion.i];
   const bien = aceptable(dicho, r);
   registra(r.pais.codigo, bien);
-  if (bien) sesion.aciertos++;
-  else sesion.errores.push({ r: r, dicho: dicho });
-
+  if (bien) sesion.aciertos++; else sesion.errores.push({ r: r, dicho: dicho });
   const v = $("veredicto");
   v.classList.remove("oculto", "bien", "mal");
   v.classList.add(bien ? "bien" : "mal");
-  v.textContent = bien ? "Correcto." : "No. Era " + r.correcta + ".";
-  if (!bien && r.pide === "pais") v.textContent = "No. Era " + r.correcta + " " + r.pais.bandera + ".";
-
+  v.textContent = bien ? "Correcto."
+    : "No. Era " + r.correcta + (r.pide === "pais" ? " " + r.pais.bandera : "") + ".";
   if (r.escribir) {
     $("campo").disabled = true;
   } else {
     Array.prototype.forEach.call($("respuestas").children, function (b) {
       b.disabled = true;
-      const txt = b.lastChild.textContent;
-      if (normaliza(txt) === normaliza(r.correcta)) b.classList.add("bien");
+      if (normaliza(b.lastChild.textContent) === normaliza(r.correcta)) b.classList.add("bien");
       else if (b === boton) b.classList.add("mal");
     });
   }
-
   if (r.pais.nota) {
     $("apunte").textContent = r.pais.nota;
     $("apunte").classList.remove("oculto");
@@ -668,13 +889,11 @@ function contesta(dicho, boton) {
   $("btn-siguiente").classList.remove("oculto");
   $("btn-siguiente").focus();
 }
-
 function siguiente() {
   if (!sesion.contestado) return;
   if (sesion.i + 1 < sesion.reactivos.length) { sesion.i++; pintaReactivo(); }
   else cierra();
 }
-
 function cierra() {
   clearInterval(sesion.cronometro);
   const total = sesion.reactivos.length;
@@ -688,7 +907,6 @@ function cierra() {
   $("final-errores").textContent = total - sesion.aciertos;
   $("final-tiempo").textContent = reloj(ms);
   $("final-ritmo").textContent = total ? Math.round(ms / total / 1000) + " s" : "—";
-
   const ul = $("final-errores-lista");
   ul.innerHTML = "";
   $("titulo-errores").textContent = sesion.errores.length
@@ -700,8 +918,7 @@ function cierra() {
     const fuerte = document.createElement("div");
     fuerte.innerHTML = "<strong>" + e.r.pais.pais + "</strong> — " + e.r.pais.capital;
     const tuya = document.createElement("div");
-    tuya.className = "tuya";
-    tuya.textContent = "respondiste: " + (e.dicho || "—");
+    tuya.className = "tuya"; tuya.textContent = "respondiste: " + (e.dicho || "—");
     d.appendChild(fuerte); d.appendChild(tuya);
     li.appendChild(b); li.appendChild(d);
     ul.appendChild(li);
@@ -711,30 +928,209 @@ function cierra() {
   ver("final");
 }
 
-// ---------- estudio ----------
-function pintaTabla(filtro) {
-  const n = normaliza(filtro);
-  const vistos = PAISES.filter(function (p) {
-    if (!n) return true;
-    return normaliza(p.pais).indexOf(n) >= 0 || normaliza(p.capital).indexOf(n) >= 0 ||
-      normaliza(p.continente).indexOf(n) >= 0 || normaliza(p.region).indexOf(n) >= 0 ||
-      p.aliasPais.some(function (a) { return normaliza(a).indexOf(n) >= 0; });
+// ================= EXPLORAR =================
+function pintaContinentes() {
+  const zona = $("continentes");
+  if (zona.childElementCount) return;
+  CONTINENTES.forEach(function (c) {
+    const codigos = codigosDe(c);
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "tarjeta-cont";
+    const caja = document.createElement("div");
+    caja.appendChild(dibujaMapa({
+      encuadre: codigos, foco: codigos, contexto: false, ancho: 220, alto: 120,
+      margen: 3, titulo: "Mapa de " + c
+    }));
+    const texto = document.createElement("div");
+    texto.style.minWidth = "0";
+    texto.innerHTML = '<div class="nom">' + c + '</div><div class="sub">' +
+      codigos.length + " países</div>";
+    b.appendChild(caja); b.appendChild(texto);
+    b.addEventListener("click", function () { abreContinente(c); });
+    zona.appendChild(b);
   });
-  $("cuenta-estudio").textContent = vistos.length + (vistos.length === 1 ? " país" : " países");
-  const zona = $("tabla");
+}
+
+function filaPais(p, alTocar) {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "reg";
+  const bnd = document.createElement("span"); bnd.className = "bnd"; bnd.textContent = p.bandera;
+  const nom = document.createElement("span"); nom.className = "pais"; nom.textContent = p.pais;
+  const cap = document.createElement("span"); cap.className = "cap"; cap.textContent = p.capital;
+  const fl = document.createElement("span"); fl.className = "flecha"; fl.textContent = "›";
+  b.appendChild(bnd); b.appendChild(nom); b.appendChild(fl); b.appendChild(cap);
+  b.addEventListener("click", function () { alTocar(p); });
+  return b;
+}
+
+function abreContinente(c) {
+  const lista = deContinente(c);
+  const codigos = lista.map(function (p) { return p.codigo; });
+  $("miga-cont").textContent = c;
+  $("cont-titulo").textContent = c;
+  const hab = lista.reduce(function (s, p) { return s + (p.poblacion ? p.poblacion.valor : 0); }, 0);
+  $("cont-sub").textContent = lista.length + " países · " + millones(hab) + " de habitantes";
+  const caja = $("cont-mapa");
+  caja.innerHTML = "";
+  caja.appendChild(dibujaMapa({
+    encuadre: codigos, zona: codigos, ancho: 620, alto: 360, titulo: "Mapa de " + c,
+    alTocar: function (cod) { if (PORCODIGO[cod]) abreFicha(PORCODIGO[cod], c); }
+  }));
+  const ul = $("cont-lista");
+  ul.innerHTML = "";
+  lista.forEach(function (p) {
+    ul.appendChild(filaPais(p, function (q) { abreFicha(q, c); }));
+  });
+  ver("continente");
+}
+
+function abreFicha(p, continente) {
+  const cont = continente || p.continente;
+  contextoFicha.continente = cont;
+  contextoFicha.lista = deContinente(cont);
+  contextoFicha.i = contextoFicha.lista.findIndex(function (q) { return q.codigo === p.codigo; });
+  $("miga-volver-cont").textContent = cont;
+  $("miga-pais").textContent = p.pais;
+  const f = $("ficha");
+  f.innerHTML = "";
+
+  const cabeza = document.createElement("div");
+  cabeza.className = "ficha-cabeza";
+  cabeza.innerHTML =
+    '<span class="bnd" role="img" aria-label="Bandera de ' + p.pais + '">' + p.bandera + '</span>' +
+    "<h2>" + p.pais + "</h2>" +
+    '<p class="cap"><b>capital</b> ' + p.capital + " · " + p.region + "</p>";
+  f.appendChild(cabeza);
+
+  const zonaMapa = document.createElement("div");
+  zonaMapa.className = "ficha-mapa";
+  const vecinos = PAISES.filter(function (q) { return q.region === p.region; })
+    .map(function (q) { return q.codigo; });
+  zonaMapa.appendChild(dibujaMapa({
+    encuadre: vecinos, zona: codigosDe(cont), foco: [p.codigo],
+    puntos: p.capital_latlng ? [p.capital_latlng] : [],
+    holgura: 0.3, ancho: 620, alto: 330, titulo: p.pais + " dentro de " + p.region
+  }));
+  const pie = document.createElement("p");
+  pie.className = "pie-mapa";
+  pie.textContent = p.region + " · " + p.capital +
+    (p.capital_latlng ? " · " + grados(p.capital_latlng[0], p.capital_latlng[1]) : "");
+  zonaMapa.appendChild(pie);
+  f.appendChild(zonaMapa);
+
+  const dl = document.createElement("dl");
+  dl.className = "datos";
+  function dato(etiqueta, valorHTML) {
+    if (!valorHTML) return;
+    const d = document.createElement("div"); d.className = "dato";
+    const dt = document.createElement("dt"); dt.textContent = etiqueta;
+    const dd = document.createElement("dd"); dd.innerHTML = valorHTML;
+    d.appendChild(dt); d.appendChild(dd); dl.appendChild(d);
+  }
+  dato("Régimen", p.regimen || "");
+  if (p.poblacion) {
+    dato("Población", '<span class="cifra">' + millones(p.poblacion.valor) + "</span>" +
+      '<span class="menor">' + cifra(p.poblacion.valor) +
+      (p.poblacion.anio ? " · dato de " + p.poblacion.anio : "") + "</span>");
+  }
+  if (p.area) {
+    dato("Superficie", '<span class="cifra">' + cifra(p.area) + " km²</span>");
+  }
+  if (p.moneda && p.moneda.length) {
+    dato("Moneda", p.moneda.map(function (m) {
+      const nombre = m.nombre.charAt(0).toUpperCase() + m.nombre.slice(1);
+      return nombre + (m.iso ? ' <span class="cifra">(' + m.iso + (m.simbolo ? " " + m.simbolo : "") + ")</span>" : "");
+    }).join(" · "));
+  }
+  dato("Continente", p.continente + " · " + p.region);
+  if (p.nota) dato("Ojo", p.nota);
+  f.appendChild(dl);
+
+  const jefes = [];
+  if (p.jefes.estado) jefes.push(p.jefes.estado);
+  if (p.jefes.gobierno) jefes.push(p.jefes.gobierno);
+  if (jefes.length) {
+    const g = document.createElement("div");
+    g.className = "gobernantes";
+    const h = document.createElement("h3");
+    h.style.fontSize = "1rem";
+    h.textContent = jefes.length > 1 ? "Quién gobierna" : "Quién gobierna";
+    g.appendChild(h);
+    jefes.forEach(function (j, k) {
+      const caja = document.createElement("div");
+      caja.className = "gobernante";
+      if (j.foto) {
+        const img = document.createElement("img");
+        img.src = "fotos/" + j.foto;
+        img.alt = j.nombre;
+        img.loading = "lazy"; img.decoding = "async";
+        img.addEventListener("error", function () {
+          const hueco = document.createElement("div");
+          hueco.className = "sinfoto";
+          hueco.textContent = j.nombre.slice(0, 1);
+          img.replaceWith(hueco);
+        });
+        caja.appendChild(img);
+      } else {
+        const hueco = document.createElement("div");
+        hueco.className = "sinfoto";
+        hueco.textContent = j.nombre.slice(0, 1);
+        caja.appendChild(hueco);
+      }
+      const texto = document.createElement("div");
+      texto.style.minWidth = "0";
+      const rol = j.unico ? "Jefatura del Estado y del gobierno"
+        : (p.jefes.estado === j ? "Jefatura del Estado" : "Jefatura del gobierno");
+      let html = '<div class="cargo">' + rol + "</div>" +
+        '<div class="quien">' + j.nombre + "</div>";
+      const linea = [j.cargo, j.desde ? "desde el " + fecha(j.desde) : null]
+        .filter(Boolean).join(" · ");
+      if (linea) html += '<div class="cap" style="font-family:var(--f-dato);font-size:.74rem;color:var(--tenue)">' + linea + "</div>";
+      if (j.bio) html += '<p class="bio">' + j.bio + "</p>";
+      if (j.wiki) html += '<p class="credito"><a href="' + j.wiki + '" target="_blank" rel="noopener">Ficha en Wikipedia</a>' +
+        (j.credito ? " · foto: " + j.credito : "") + "</p>";
+      else if (j.credito) html += '<p class="credito">foto: ' + j.credito + "</p>";
+      texto.innerHTML = html;
+      caja.appendChild(texto);
+      g.appendChild(caja);
+    });
+    f.appendChild(g);
+  }
+  ver("ficha");
+}
+
+function mueveFicha(paso) {
+  const l = contextoFicha.lista;
+  if (!l.length) return;
+  const i = (contextoFicha.i + paso + l.length) % l.length;
+  abreFicha(l[i], contextoFicha.continente);
+}
+
+function buscar(texto) {
+  const n = normaliza(texto);
+  const zona = $("resultados");
+  if (!n) {
+    zona.classList.add("oculto"); zona.innerHTML = "";
+    $("continentes").classList.remove("oculto");
+    return;
+  }
+  $("continentes").classList.add("oculto");
+  zona.classList.remove("oculto");
+  const hallados = PAISES.filter(function (p) {
+    return [p.pais, p.capital, p.continente, p.region, p.regimen || ""]
+        .concat(p.aliasPais, (p.moneda || []).map(function (m) { return m.nombre + " " + (m.iso || ""); }),
+                Object.keys(p.jefes).map(function (k) { return p.jefes[k].nombre; }))
+      .some(function (t) { return normaliza(t).indexOf(n) >= 0; });
+  });
   zona.innerHTML = "";
-  vistos.forEach(function (p) {
-    const d = document.createElement("div"); d.className = "reg";
-    const b = document.createElement("span"); b.className = "bnd"; b.textContent = p.bandera;
-    const nom = document.createElement("div"); nom.className = "pais"; nom.textContent = p.pais;
-    const cap = document.createElement("div"); cap.className = "cap";
-    cap.innerHTML = "<span>capital</span>" + p.capital + " · " + p.region;
-    d.appendChild(b); d.appendChild(nom); d.appendChild(cap);
-    if (p.nota) {
-      const a = document.createElement("div"); a.className = "apunte"; a.textContent = p.nota;
-      d.appendChild(a);
-    }
-    zona.appendChild(d);
+  if (!hallados.length) {
+    const p = document.createElement("p");
+    p.className = "vacio"; p.textContent = "Nada con eso.";
+    zona.appendChild(p);
+    return;
+  }
+  hallados.slice(0, 40).forEach(function (p) {
+    zona.appendChild(filaPais(p, function (q) { abreFicha(q, q.continente); }));
   });
 }
 
@@ -743,7 +1139,7 @@ function pintaProgreso() {
   const zona = $("medidores");
   zona.innerHTML = "";
   CONTINENTES.concat(["Todos"]).forEach(function (c) {
-    const grupo = c === "Todos" ? PAISES : PAISES.filter(function (p) { return p.continente === c; });
+    const grupo = c === "Todos" ? PAISES : deContinente(c);
     const dom = grupo.filter(function (p) { return dominado(p.codigo); }).length;
     const pct = grupo.length ? Math.round(dom / grupo.length * 100) : 0;
     const d = document.createElement("div"); d.className = "medidor";
@@ -756,7 +1152,6 @@ function pintaProgreso() {
     d.appendChild(nom); d.appendChild(p); d.appendChild(barra);
     zona.appendChild(d);
   });
-
   const ul = $("peores");
   ul.innerHTML = "";
   const malos = PAISES.filter(function (p) { return progreso[p.codigo] && progreso[p.codigo].mal > 0; })
@@ -784,12 +1179,8 @@ function pintaProgreso() {
 }
 
 // ---------- enganches ----------
-$("btn-examen").addEventListener("click", function () {
-  arranca(baraja(), true, "Examen · " + elegido.ambito);
-});
-$("btn-practica").addEventListener("click", function () {
-  arranca(baraja(), false, "Práctica · " + elegido.ambito);
-});
+$("btn-examen").addEventListener("click", function () { arranca(baraja(), true, "Examen · " + elegido.ambito); });
+$("btn-practica").addEventListener("click", function () { arranca(baraja(), false, "Práctica · " + elegido.ambito); });
 $("btn-fallos").addEventListener("click", function () {
   const lista = porRepasar();
   if (lista.length) arranca(lista, false, "Repaso de fallos");
@@ -809,30 +1200,37 @@ $("forma-escribir").addEventListener("submit", function (ev) {
   if (sesion.contestado) { siguiente(); return; }
   contesta($("campo").value.trim(), null);
 });
-$("busca").addEventListener("input", function () { pintaTabla($("busca").value); });
+$("busca").addEventListener("input", function () { buscar($("busca").value); });
+$("miga-volver-cont").addEventListener("click", function () {
+  if (contextoFicha.continente) abreContinente(contextoFicha.continente);
+});
+$("btn-ficha-anterior").addEventListener("click", function () { mueveFicha(-1); });
+$("btn-ficha-siguiente").addEventListener("click", function () { mueveFicha(1); });
 $("btn-borrar").addEventListener("click", function () {
-  progreso = {};
-  guardaProgreso();
-  pintaProgreso();
-  pintaPie();
+  progreso = {}; guardaProgreso(); pintaProgreso(); pintaPie();
 });
 document.addEventListener("keydown", function (ev) {
-  if ($("p-juego").classList.contains("oculto")) return;
-  const r = sesion && sesion.reactivos[sesion.i];
-  if (!r) return;
-  if (!sesion.contestado && !r.escribir && /^[1-4]$/.test(ev.key)) {
-    const b = $("respuestas").children[Number(ev.key) - 1];
-    if (b) { ev.preventDefault(); b.click(); }
-  } else if (sesion.contestado && (ev.key === "Enter" || ev.key === " ")) {
-    if (document.activeElement && document.activeElement.id === "campo") return;
-    ev.preventDefault(); siguiente();
+  if (!$("p-juego").classList.contains("oculto")) {
+    const r = sesion && sesion.reactivos[sesion.i];
+    if (!r) return;
+    if (!sesion.contestado && !r.escribir && /^[1-4]$/.test(ev.key)) {
+      const b = $("respuestas").children[Number(ev.key) - 1];
+      if (b) { ev.preventDefault(); b.click(); }
+    } else if (sesion.contestado && (ev.key === "Enter" || ev.key === " ")) {
+      if (document.activeElement && document.activeElement.id === "campo") return;
+      ev.preventDefault(); siguiente();
+    }
+    return;
+  }
+  if (!$("p-ficha").classList.contains("oculto")) {
+    if (ev.key === "ArrowLeft") { ev.preventDefault(); mueveFicha(-1); }
+    if (ev.key === "ArrowRight") { ev.preventDefault(); mueveFicha(1); }
   }
 });
 
 // ---------- arranque ----------
 $("c-paises").textContent = PAISES.length;
 pintaSelectores();
-pintaTabla("");
 pintaPie();
 ver("inicio");
 </script>

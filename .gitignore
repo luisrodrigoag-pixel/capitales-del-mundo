@@ -1,3 +1,5 @@
 datos/paises_raw*
 _borradores/
+_probe*.html
+*.bak-*
 .DS_Store
