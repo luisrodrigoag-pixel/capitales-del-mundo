@@ -96,26 +96,52 @@ body::before {
 }
 .pestanas button[aria-current="true"] { background: var(--tinta); color: var(--papel); border-color: var(--tinta); }
 
-/* ---------- portada ---------- */
-.portada {
-  position: relative; overflow: hidden; border: 1px solid var(--linea);
-  background: var(--hoja); padding: 2rem 1.4rem 1.6rem; margin-top: .6rem;
+/* ---------- cabecera y tira de cifras ---------- */
+.cabecera { padding-block: 1.5rem .9rem; }
+.cabecera .rotulo { display: block; margin-bottom: .55rem; }
+.cabecera h1 { font-size: clamp(2.2rem, 9.5vw, 3.6rem); font-weight: 800; letter-spacing: -.025em; }
+.cabecera .lema { font-style: italic; color: var(--tenue); margin-top: .65rem; max-width: 34rem; }
+.tira {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border-block: 1px solid var(--linea);
 }
-.portada::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
-  background:
-    repeating-linear-gradient(to right, var(--linea) 0 1px, transparent 1px 3.2rem),
-    repeating-linear-gradient(to bottom, var(--linea) 0 1px, transparent 1px 3.2rem);
-  mask-image: radial-gradient(ellipse at 78% 18%, #000 0%, transparent 72%);
-  -webkit-mask-image: radial-gradient(ellipse at 78% 18%, #000 0%, transparent 72%);
+.tira > div { padding: .75rem .9rem .8rem 0; min-width: 0; }
+.tira > div + div { border-left: 1px solid var(--linea); padding-left: .9rem; }
+.tira b {
+  display: block; font-family: var(--f-dato); font-size: clamp(1.25rem, 5.5vw, 1.6rem);
+  font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1.1;
 }
-.portada > * { position: relative; }
-.portada .rotulo { display: block; margin-bottom: .6rem; }
-.portada h1 { font-size: clamp(2.1rem, 9vw, 3.4rem); font-weight: 800; letter-spacing: -.02em; }
-.portada .lema { font-style: italic; color: var(--tenue); margin-top: .7rem; max-width: 32rem; }
-.cifras { display: flex; gap: 1.6rem; flex-wrap: wrap; margin-top: 1.3rem;
-  font-family: var(--f-dato); font-size: .78rem; color: var(--tenue); }
-.cifras b { display: block; font-size: 1.5rem; color: var(--tinta); font-variant-numeric: tabular-nums; }
+.tira span {
+  font-family: var(--f-dato); font-size: .66rem; letter-spacing: .11em;
+  text-transform: uppercase; color: var(--tenue);
+}
+
+/* ---------- lámina del mapa ---------- */
+.plancha { margin-top: 1.3rem; background: var(--hoja); border: 1px solid var(--linea); padding: .5rem; }
+.plancha-interior { border: 1px solid var(--linea); padding: .6rem .6rem .5rem; }
+.plancha-barra {
+  display: flex; gap: .45rem; flex-wrap: wrap; align-items: center;
+  justify-content: space-between; margin-bottom: .55rem;
+}
+.zooms { display: flex; gap: .25rem; flex-wrap: wrap; }
+.zooms button {
+  background: none; border: 1px solid var(--linea); border-radius: 2px;
+  padding: .25rem .55rem; font-family: var(--f-dato); font-size: .68rem;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--tenue);
+}
+.zooms button[aria-pressed="true"] { background: var(--agua); border-color: var(--agua); color: var(--hoja); }
+.busca-mapa {
+  flex: 1 1 8rem; min-width: 0; font: inherit; font-size: .88rem; color: var(--tinta);
+  background: var(--papel); border: 1px solid var(--linea); border-radius: 2px; padding: .3rem .55rem;
+}
+.busca-mapa:focus-visible { outline: 2px solid var(--agua); outline-offset: 1px; }
+.leyenda {
+  display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-top: .5rem;
+  font-family: var(--f-dato); font-size: .68rem; letter-spacing: .04em; color: var(--tenue);
+}
+.leyenda i { display: inline-block; width: .7rem; height: .7rem; margin-right: .35rem; vertical-align: -1px; }
+.leyenda .m-zona { background: color-mix(in srgb, var(--agua) 22%, var(--relieve)); }
+.leyenda .m-logrado { background: color-mix(in srgb, var(--tierra) 45%, var(--relieve)); }
 
 /* ---------- formulario de examen ---------- */
 fieldset { border: 0; padding: 0; margin: 1.6rem 0 0; }
@@ -215,8 +241,14 @@ legend {
 .mapa .foco   { fill: var(--agua); stroke: var(--hoja); stroke-width: .8; }
 .mapa .halo   { fill: none; stroke: var(--coral); stroke-width: 1.6; opacity: .85; }
 .mapa .punto  { fill: var(--coral); stroke: var(--hoja); stroke-width: .8; }
-.mapa .tocable { fill: transparent; cursor: pointer; }
-.mapa .tocable:hover + .capa-nombre, .mapa .tocable:focus-visible + .capa-nombre { opacity: 1; }
+.mapa .logrado { fill: color-mix(in srgb, var(--tierra) 45%, var(--relieve)); stroke: var(--papel); stroke-width: .6; }
+.mapa .isla {
+  fill: color-mix(in srgb, var(--agua) 45%, var(--relieve));
+  stroke: var(--hoja); stroke-width: .7;
+}
+.mapa .isla.logrado { fill: var(--tierra); }
+.mapa [data-codigo] { cursor: pointer; }
+.mapa [data-codigo]:hover, .mapa [data-codigo]:focus-visible { fill: var(--agua); outline: none; }
 
 /* ---------- explorar ---------- */
 .continentes { display: grid; gap: .7rem; margin-top: 1.2rem; }
@@ -308,24 +340,61 @@ legend {
   </div>
 
   <nav class="pestanas" id="pestanas" aria-label="Secciones">
-    <button type="button" data-ir="inicio" aria-current="true">Examen</button>
+    <button type="button" data-ir="inicio" aria-current="true">Mapa</button>
+    <button type="button" data-ir="examen">Examen</button>
     <button type="button" data-ir="explorar">Explorar</button>
-    <button type="button" data-ir="progreso">Mi progreso</button>
+    <button type="button" data-ir="progreso">Progreso</button>
   </nav>
 
-  <!-- ================= INICIO ================= -->
+  <!-- ================= ENTRADA: EL MAPAMUNDI ================= -->
   <section id="p-inicio">
-    <div class="portada">
-      <span class="rotulo">195 países · 5 continentes</span>
+    <header class="cabecera">
+      <span class="rotulo">Atlas y examen · 195 países</span>
       <h1>Capitales del Mundo</h1>
-      <p class="lema">Banderas, países y capitales. Eliges el modo y el continente, la app
-        te califica y te deja repasar exactamente lo que fallaste.</p>
-      <div class="cifras">
-        <div><b id="c-paises">195</b>países</div>
-        <div><b id="c-dominados">0</b>dominados</div>
-        <div><b id="c-fallos">0</b>por repasar</div>
+      <p class="lema">Toca cualquier país del mapa para abrir su ficha: capital, régimen,
+        población, moneda y quién gobierna. O ponte a examen.</p>
+    </header>
+
+    <div class="tira">
+      <div><b id="c-paises">195</b><span>países</span></div>
+      <div><b id="c-dominados">0</b><span>dominados</span></div>
+      <div><b id="c-fallos">0</b><span>por repasar</span></div>
+    </div>
+
+    <div class="plancha">
+      <div class="plancha-interior">
+        <div class="plancha-barra">
+          <div class="zooms" id="zooms"></div>
+          <input type="search" class="busca-mapa" id="busca-mapa" placeholder="Buscar país…"
+                 aria-label="Buscar un país para abrir su ficha">
+        </div>
+        <div id="mapa-mundo"></div>
+        <p class="pie-mapa" id="pie-mundo">Toca un país para abrir su ficha.</p>
+        <div class="leyenda">
+          <span><i class="m-zona"></i>sin dominar</span>
+          <span><i class="m-logrado"></i>dominado</span>
+          <span>los países muy chicos salen como punto</span>
+        </div>
       </div>
     </div>
+    <div class="listado oculto" id="sugerencias"></div>
+
+    <div class="acciones">
+      <button type="button" class="btn" id="btn-ir-examen">Empezar examen</button>
+      <button type="button" class="btn sec" id="btn-ir-explorar">Ver por continente</button>
+      <button type="button" class="btn sec oculto" id="btn-fallos">Repasar mis fallos</button>
+    </div>
+  </section>
+
+  <!-- ================= EXAMEN: ANTES DE EMPEZAR ================= -->
+  <section id="p-examen" class="oculto">
+    <div class="migas">
+      <button type="button" data-ir="inicio">Mapa</button><span>›</span>
+      <span>Examen</span>
+    </div>
+    <h2 style="font-size:1.5rem;margin-top:.5rem">Antes de empezar</h2>
+    <p style="color:var(--tenue);margin-top:.35rem">Eliges qué se te pregunta, de dónde y
+      cuántos reactivos. El examen se califica sobre 10.</p>
 
     <fieldset>
       <legend>Modo</legend>
@@ -345,7 +414,6 @@ legend {
     <div class="acciones">
       <button type="button" class="btn" id="btn-examen">Empezar examen</button>
       <button type="button" class="btn sec" id="btn-practica">Práctica libre</button>
-      <button type="button" class="btn sec oculto" id="btn-fallos">Repasar mis fallos</button>
     </div>
     <p class="nota-pie" id="pie-inicio"></p>
   </section>
@@ -588,7 +656,9 @@ function trazo(polis, pr) {
 
 function dibujaMapa(opc) {
   const ancho = opc.ancho || 600, alto = opc.alto || 320, margen = opc.margen == null ? 6 : opc.margen;
-  const r = recuadro(opc.encuadre);
+  // El recuadro se puede fijar a mano. El mapamundi lo necesita: calculado solo,
+  // sale centrado en el Pacífico, porque así el rectángulo es más angosto.
+  const r = opc.recuadro ? Object.assign({}, opc.recuadro) : recuadro(opc.encuadre);
   const holgura = opc.holgura == null ? 0.08 : opc.holgura;
   const hx = (r.este - r.oeste) * holgura, hy = (r.norte - r.sur) * holgura;
   r.oeste -= hx; r.este += hx; r.sur -= hy; r.norte += hy;
@@ -605,32 +675,61 @@ function dibujaMapa(opc) {
   (opc.zona || []).forEach(function (c) { zona[c] = true; });
   const foco = {};
   (opc.foco || []).forEach(function (c) { foco[c] = true; });
+  const logrado = {};
+  (opc.logrados || []).forEach(function (c) { logrado[c] = true; });
+
+  function interactivo(el, codigo) {
+    el.setAttribute("data-codigo", codigo);
+    const t = document.createElementNS(ns, "title");
+    t.textContent = PORCODIGO[codigo] ? PORCODIGO[codigo].pais : codigo;
+    el.appendChild(t);
+    if (!opc.alTocar) return;
+    el.setAttribute("tabindex", "0");
+    el.setAttribute("role", "button");
+    el.addEventListener("click", function () { opc.alTocar(codigo); });
+    el.addEventListener("keydown", function (ev) {
+      if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); opc.alTocar(codigo); }
+    });
+    if (opc.alSeñalar) {
+      el.addEventListener("mouseenter", function () { opc.alSeñalar(codigo); });
+      el.addEventListener("mouseleave", function () { opc.alSeñalar(null); });
+    }
+  }
 
   function pinta(polis, clase, codigo) {
     const p = document.createElementNS(ns, "path");
     p.setAttribute("d", trazo(polis, pr));
     p.setAttribute("class", clase);
-    if (codigo) {
-      p.setAttribute("data-codigo", codigo);
-      const t = document.createElementNS(ns, "title");
-      t.textContent = PORCODIGO[codigo] ? PORCODIGO[codigo].pais : codigo;
-      p.appendChild(t);
-      if (opc.alTocar) {
-        p.style.cursor = "pointer";
-        p.addEventListener("click", function () { opc.alTocar(codigo); });
-      }
-    }
+    if (codigo) interactivo(p, codigo);
     svg.appendChild(p);
   }
 
   if (opc.contexto !== false) pinta(MAPA.resto, "fondo");
   Object.keys(MAPA.paises).forEach(function (c) {
     if (foco[c]) return;
-    pinta(MAPA.paises[c], zona[c] ? "zona" : "fondo", zona[c] ? c : null);
+    const clase = logrado[c] ? "logrado" : zona[c] ? "zona" : "fondo";
+    pinta(MAPA.paises[c], clase, zona[c] ? c : null);
   });
   (opc.foco || []).forEach(function (c) {
     if (MAPA.paises[c]) pinta(MAPA.paises[c], "foco", c);
   });
+
+  // Los 29 países sin contorno en el mapa de 110 m —Malta, Nauru, Singapur— se
+  // dibujan como un punto, para que existan y se puedan tocar igual que el resto.
+  if (opc.islas) {
+    (opc.zona || []).forEach(function (c) {
+      if (MAPA.paises[c] || foco[c]) return;
+      const q = PORCODIGO[c];
+      if (!q || !q.latlng) return;
+      const circulo = document.createElementNS(ns, "circle");
+      circulo.setAttribute("cx", pr.x(q.latlng[1]).toFixed(1));
+      circulo.setAttribute("cy", pr.y(q.latlng[0]).toFixed(1));
+      circulo.setAttribute("r", opc.radioIsla || 3.2);
+      circulo.setAttribute("class", "isla" + (logrado[c] ? " logrado" : ""));
+      interactivo(circulo, c);
+      svg.appendChild(circulo);
+    });
+  }
 
   (opc.puntos || []).forEach(function (pt) {
     const cx = pr.x(pt[1]), cy = pr.y(pt[0]);
@@ -734,16 +833,18 @@ function pintaPie() {
 }
 
 // ---------- navegación ----------
-const PANTALLAS = ["inicio", "juego", "final", "explorar", "continente", "ficha", "progreso"];
+const PANTALLAS = ["inicio", "examen", "juego", "final", "explorar", "continente", "ficha", "progreso"];
 function ver(cual) {
   PANTALLAS.forEach(function (p) { $("p-" + p).classList.toggle("oculto", p !== cual); });
   $("instrumentos").classList.toggle("oculto", cual !== "juego");
   $("pestanas").classList.toggle("oculto", cual === "juego");
-  const marcado = cual === "continente" || cual === "ficha" ? "explorar" : cual;
+  const marcado = cual === "continente" || cual === "ficha" ? "explorar"
+    : cual === "juego" || cual === "final" ? "examen" : cual;
   Array.prototype.forEach.call($("pestanas").children, function (b) {
     b.setAttribute("aria-current", String(b.getAttribute("data-ir") === marcado));
   });
-  if (cual === "inicio") pintaPie();
+  if (cual === "inicio") { pintaPie(); pintaMundo(); }
+  if (cual === "examen") pintaPie();
   if (cual === "explorar") pintaContinentes();
   if (cual === "progreso") pintaProgreso();
   window.scrollTo(0, 0);
@@ -942,6 +1043,52 @@ function cierra() {
   ver("final");
 }
 
+// ================= EL MAPAMUNDI DE LA ENTRADA =================
+let zoomMapa = "Mundo";
+const ZOOMS = ["Mundo"].concat(CONTINENTES);
+
+function pintaZooms() {
+  const zona = $("zooms");
+  zona.innerHTML = "";
+  ZOOMS.forEach(function (z) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = z;
+    b.setAttribute("aria-pressed", String(z === zoomMapa));
+    b.addEventListener("click", function () {
+      zoomMapa = z;
+      pintaZooms();
+      pintaMundo();
+    });
+    zona.appendChild(b);
+  });
+}
+
+function pintaMundo() {
+  const todos = PAISES.map(function (p) { return p.codigo; });
+  const encuadre = zoomMapa === "Mundo" ? todos : codigosDe(zoomMapa);
+  // de Alaska a Nueva Zelanda y de Islandia a la Antártida, sin hielo de sobra
+  const MUNDO = { oeste: -169, este: 180, sur: -56, norte: 78, corre: false };
+  const logrados = PAISES.filter(function (p) { return dominado(p.codigo); })
+    .map(function (p) { return p.codigo; });
+  const caja = $("mapa-mundo");
+  caja.innerHTML = "";
+  caja.appendChild(dibujaMapa({
+    encuadre: encuadre, zona: todos, logrados: logrados, islas: true,
+    recuadro: zoomMapa === "Mundo" ? MUNDO : null,
+    radioIsla: zoomMapa === "Mundo" ? 2.8 : 4,
+    holgura: zoomMapa === "Mundo" ? 0 : 0.08,
+    ancho: 640, alto: zoomMapa === "Mundo" ? 290 : 360,
+    titulo: zoomMapa === "Mundo" ? "Mapa del mundo" : "Mapa de " + zoomMapa,
+    alTocar: function (c) { if (PORCODIGO[c]) abreFicha(PORCODIGO[c], PORCODIGO[c].continente); },
+    alSeñalar: function (c) {
+      $("pie-mundo").textContent = c && PORCODIGO[c]
+        ? PORCODIGO[c].pais + " · " + PORCODIGO[c].capital
+        : "Toca un país para abrir su ficha.";
+    }
+  }));
+}
+
 // ================= EXPLORAR =================
 function pintaContinentes() {
   const zona = $("continentes");
@@ -1127,15 +1274,15 @@ function mueveFicha(paso) {
   abreFicha(l[i], contextoFicha.continente);
 }
 
-function buscar(texto) {
+function buscar(texto, idZona, alVaciar, alLlenar) {
   const n = normaliza(texto);
-  const zona = $("resultados");
+  const zona = $(idZona || "resultados");
   if (!n) {
     zona.classList.add("oculto"); zona.innerHTML = "";
-    $("continentes").classList.remove("oculto");
+    if (alVaciar) alVaciar();
     return;
   }
-  $("continentes").classList.add("oculto");
+  if (alLlenar) alLlenar();
   zona.classList.remove("oculto");
   const hallados = PAISES.filter(function (p) {
     return [p.pais, p.capital, p.continente, p.region, p.regimen || ""]
@@ -1200,6 +1347,8 @@ function pintaProgreso() {
 }
 
 // ---------- enganches ----------
+$("btn-ir-examen").addEventListener("click", function () { ver("examen"); });
+$("btn-ir-explorar").addEventListener("click", function () { ver("explorar"); });
 $("btn-examen").addEventListener("click", function () { arranca(baraja(), true, "Examen · " + elegido.ambito); });
 $("btn-practica").addEventListener("click", function () { arranca(baraja(), false, "Práctica · " + elegido.ambito); });
 $("btn-fallos").addEventListener("click", function () {
@@ -1211,7 +1360,7 @@ $("btn-salir").addEventListener("click", function () {
   if (sesion) clearInterval(sesion.cronometro);
   ver("inicio");
 });
-$("btn-otro").addEventListener("click", function () { ver("inicio"); });
+$("btn-otro").addEventListener("click", function () { ver("examen"); });
 $("btn-repetir-fallos").addEventListener("click", function () {
   const lista = sesion && sesion.ultimosErrores ? sesion.ultimosErrores : [];
   if (lista.length) arranca(lista, false, "Repaso de errores");
@@ -1221,7 +1370,14 @@ $("forma-escribir").addEventListener("submit", function (ev) {
   if (sesion.contestado) { siguiente(); return; }
   contesta($("campo").value.trim(), null);
 });
-$("busca").addEventListener("input", function () { buscar($("busca").value); });
+$("busca").addEventListener("input", function () {
+  buscar($("busca").value, "resultados",
+    function () { $("continentes").classList.remove("oculto"); },
+    function () { $("continentes").classList.add("oculto"); });
+});
+$("busca-mapa").addEventListener("input", function () {
+  buscar($("busca-mapa").value, "sugerencias");
+});
 $("miga-volver-cont").addEventListener("click", function () {
   if (contextoFicha.continente) abreContinente(contextoFicha.continente);
 });
@@ -1252,6 +1408,7 @@ document.addEventListener("keydown", function (ev) {
 // ---------- arranque ----------
 $("c-paises").textContent = PAISES.length;
 pintaSelectores();
+pintaZooms();
 pintaPie();
 ver("inicio");
 </script>
