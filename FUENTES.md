@@ -21,6 +21,46 @@ consultable y el script que lo trae está en `herramientas/`.
 | Foto | Wikimedia Commons | P18 del gobernante, miniatura de 220 px reducida a 200. El autor y la licencia se guardan y la ficha los muestra |
 | Contornos del mapa | Natural Earth, vía world-atlas 110m | TopoJSON decodificado y simplificado con Douglas-Peucker; coordenadas a dos decimales |
 
+## El área de historia
+
+`datos/historia.json` lo rehace `herramientas/traer_historia.py`.
+
+| Campo | Fuente | Cómo |
+|---|---|---|
+| Fecha de creación y de disolución de cada Estado | Wikidata | P571 y P576 del elemento del Estado, no del país que quedó después. Cuando hay varias fechas de disolución se toma la más tardía: para la RDA, Wikidata trae 1989 y 1990, y vale 1990 |
+| Capital del Estado desaparecido | Wikidata | P36 del Estado |
+| Repúblicas de la URSS y de Yugoslavia | Wikidata | se parte del país de hoy y se sigue «reemplaza a» (P1365). Lo que esa propiedad no encadena —Turkmenistán, y Bosnia, Serbia y Montenegro— se pide por la etiqueta en español de la república, que está escrita en el script |
+| Capital de cada república | Wikidata | P36 de la república |
+| Naciones del Reino Unido y provincias de los Países Bajos | Wikidata | P150 («contiene la división administrativa») de Q145 y Q55, con su P36 |
+| País y capital de hoy | este mismo proyecto | se leen de `datos/paises.json`, no se vuelven a consultar: ahí ya están resueltas las decisiones de la casa (Esuatini y no Suazilandia, Sri Jayawardenapura Kotte y no Colombo), y si se preguntaran aparte el área de historia contradiría al atlas en la misma página |
+| Preguntas de capitales del repaso | — | se arman solas con las filas de la tabla del bloque, así que no pueden desincronizarse del dato |
+
+### Lo que es redacción, no dato
+
+Los textos de cada bloque —la entrada, las claves y las preguntas de concepto—
+están escritos, no traídos de ninguna base. Viven en la constante `TEXTOS` de
+`herramientas/traer_historia.py` y se cotejaron con los artículos de es.wikipedia
+que quedan anotados en el campo «fuente» de cada bloque, que la propia lámina
+muestra al pie.
+
+También es decisión editorial, y está en constantes con nombre al principio del
+script:
+
+- **Qué entra.** Los cuatro bloques que se habían pedido, más Checoslovaquia,
+  las dos Alemanias, los países renombrados y las capitales que se mudaron.
+- **Las quince repúblicas.** Son las que existían al disolverse la URSS en
+  diciembre de 1991. La Unión tuvo otras antes —Transcaucasia,
+  Carelo-Finesa— que no llegaron a ese día y no entran.
+- **Kosovo.** No es miembro de la ONU y no está en el examen de los 195; en el
+  bloque de Yugoslavia se explica el caso en el texto, no en la tabla.
+- **Las dos capitales de Uzbekistán y Kazajistán.** Wikidata ofrece varias para
+  la república soviética; se eligió la que valía al final (Taskent y Alma-Atá).
+- **Türkiye y Cabo Verde** no están en la tabla de países renombrados: no
+  cambiaron de nombre, pidieron que no se traduzca el que ya tenían. Eso se
+  cuenta en las claves del bloque.
+- **Los tres municipios del Caribe** —Bonaire, Saba y San Eustaquio— cuelgan de
+  los Países Bajos por P150 pero no son provincias: van en una tabla aparte.
+
 ## Lo que se decidió a mano
 
 Está todo arriba en `herramientas/traer_datos.py`, en constantes con nombre, no

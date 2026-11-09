@@ -30,6 +30,25 @@ a un país se abre su ficha:
 El buscador encuentra por país, capital, moneda, forma de gobierno o nombre del
 gobernante. En la ficha, las flechas ‹ › del teclado pasan al país siguiente.
 
+**Historia.** Ocho láminas de estudio con lo que el mapa de hoy no explica:
+Estados que desaparecieron y nombres que se usan mal.
+
+- la Unión Soviética y los quince países que salieron de ella, con la capital de
+  cada república soviética al lado de la de hoy;
+- Yugoslavia y los seis países de la ONU que quedaron, más Kosovo, que se
+  explica aparte;
+- Reino Unido, Gran Bretaña, Inglaterra e Islas Británicas: qué es cada cosa y
+  las capitales de las cuatro naciones;
+- Países Bajos y Holanda: las doce provincias, las dos que se llaman Holanda, y
+  por qué la capital es Ámsterdam pero el gobierno está en La Haya;
+- Checoslovaquia, las dos Alemanias, los países que cambiaron de nombre
+  (Birmania, Persia, Siam, Zaire, Rodesia…) y las capitales que se mudaron de
+  ciudad (Brasilia, Abuya, Astaná, Naipyidó…).
+
+Cada lámina trae su tabla, cuatro o cinco claves de lo que se confunde, y un
+repaso de opción múltiple con las preguntas de ese bloque: las de concepto están
+escritas, y las de capitales se arman solas con los datos de la tabla.
+
 **Mi progreso.** Porcentaje dominado por continente y tus diez peores. Un país
 cuenta como dominado con dos aciertos seguidos. Se guarda en el navegador donde
 juegas (`localStorage`): no sale de ahí ni se sincroniza entre dispositivos.
@@ -47,6 +66,8 @@ Ver [FUENTES.md](FUENTES.md) para el detalle de de dónde sale cada campo.
   en español, continente, región, población, moneda, forma de gobierno,
   coordenadas de la capital, gobernantes y notas.
 - `datos/mapa.json` — los contornos de 174 países, simplificados, en grados.
+- `datos/historia.json` — los ocho bloques del área de historia: texto, tabla y
+  preguntas de cada uno.
 - `fotos/` — un retrato por gobernante, reducido a 200 px. El autor y la
   licencia de cada uno están en `datos/paises.json` y la ficha los muestra.
 
@@ -71,16 +92,12 @@ Para rehacer los datos desde las fuentes, en este orden:
 python3 herramientas/traer_datos.py        # Wikidata + es.wikipedia + mledoze
 python3 herramientas/traducir_cargos.py    # los cargos que solo venían en inglés
 python3 herramientas/bajar_fotos.py        # los retratos que falten
+python3 herramientas/traer_historia.py     # el área de historia, desde Wikidata
 python3 armar.py
 ```
 
 Los gobernantes y la población cambian; eso se vuelve a correr cada tanto.
 Última corrida: **9 de noviembre de 2026**.
-
-## Pendiente
-
-Los siguientes bloques de estudio: la Unión Soviética, Yugoslavia, la diferencia
-entre Reino Unido, Gran Bretaña e Inglaterra, y Países Bajos contra Holanda.
 
 ## Dos advertencias
 

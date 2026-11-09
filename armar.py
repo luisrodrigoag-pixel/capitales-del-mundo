@@ -11,10 +11,12 @@ import json, pathlib
 aqui = pathlib.Path(__file__).parent
 paises = json.loads((aqui / "datos" / "paises.json").read_text(encoding="utf-8"))
 mapa = json.loads((aqui / "datos" / "mapa.json").read_text(encoding="utf-8"))
+historia = json.loads((aqui / "datos" / "historia.json").read_text(encoding="utf-8"))
 
 bloque = (
     "const PAISES_CRUDO = " + json.dumps(paises, ensure_ascii=False, separators=(",", ":")) + ";\n"
-    "const MAPA = " + json.dumps(mapa, ensure_ascii=False, separators=(",", ":")) + ";"
+    "const MAPA = " + json.dumps(mapa, ensure_ascii=False, separators=(",", ":")) + ";\n"
+    "const HISTORIA_CRUDO = " + json.dumps(historia, ensure_ascii=False, separators=(",", ":")) + ";"
 )
 
 plantilla = (aqui / "_plantilla.html").read_text(encoding="utf-8")
@@ -52,5 +54,7 @@ fotos = len(list((aqui / "fotos").glob("*.jpg"))) if (aqui / "fotos").exists() e
 print("países    ", len(paises))
 print("contornos ", len(mapa["paises"]))
 print("fotos     ", fotos)
+print("historia  ", len(historia["bloques"]), "bloques,",
+      sum(len(b["preguntas"]) for b in historia["bloques"]), "preguntas")
 print("pagina.html", f"{len(pagina.encode()):,}", "bytes")
 print("index.html ", f"{len(completo.encode()):,}", "bytes")
