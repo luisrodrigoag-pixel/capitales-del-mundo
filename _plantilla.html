@@ -1054,8 +1054,15 @@ function abreFicha(p, continente) {
     g.className = "gobernantes";
     const h = document.createElement("h3");
     h.style.fontSize = "1rem";
-    h.textContent = jefes.length > 1 ? "Quién gobierna" : "Quién gobierna";
+    h.textContent = "Quién gobierna";
     g.appendChild(h);
+    if (p.nota_jefes) {
+      const aviso = document.createElement("p");
+      aviso.className = "apunte";
+      aviso.style.marginTop = "0";
+      aviso.textContent = p.nota_jefes;
+      g.appendChild(aviso);
+    }
     jefes.forEach(function (j, k) {
       const caja = document.createElement("div");
       caja.className = "gobernante";

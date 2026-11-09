@@ -196,7 +196,8 @@
     "wiki": "https://es.wikipedia.org/wiki/Xavier_Espot_Zamora",
     "credito": "OSCE Parliamentary Assembly / CC BY-SA 2.0"
    }
-  }
+  },
+  "nota_jefes": "Andorra tiene dos coprincipes, el obispo de Urgel y el presidente de Francia. Aquí aparece el episcopal."
  },
  {
   "codigo": "AO",
@@ -1157,7 +1158,8 @@
     "wiki": "https://es.wikipedia.org/wiki/Borjana_Krišto",
     "credito": "Lukasz Kobus - European Commission / CC BY 4.0"
    }
-  }
+  },
+  "nota_jefes": "La jefatura del Estado es una presidencia colegiada de tres miembros —bosniaco, croata y serbio— que se turnan la presidencia cada ocho meses. Aquí aparece uno de los tres."
  },
  {
   "codigo": "BW",
@@ -1540,7 +1542,6 @@
   "bandera": "🇨🇻",
   "continente": "África",
   "region": "África occidental",
-  "alias_pais": [],
   "poblacion": {
    "valor": 555988,
    "anio": 2020
@@ -2121,7 +2122,6 @@
   "bandera": "🇰🇵",
   "continente": "Asia",
   "region": "Asia oriental",
-  "alias_pais": [],
   "poblacion": {
    "valor": 26418204,
    "anio": 2023
@@ -7693,7 +7693,8 @@
     "wiki": "https://es.wikipedia.org/wiki/Denise_Bronzetti",
     "credito": "Marco Zeppetella / CC BY 4.0"
    }
-  }
+  },
+  "nota_jefes": "San Marino tiene dos Capitanes Regentes que gobiernan juntos seis meses y se renuevan cada 1 de abril y cada 1 de octubre, así que este dato envejece rápido."
  },
  {
   "codigo": "VC",
@@ -8455,7 +8456,8 @@
     "credito": "unbekannt; Upload by sidonius ( talk ) 09:50, 14 March 2010 (UTC) / Public domain",
     "unico": true
    }
-  }
+  },
+  "nota_jefes": "Suiza no tiene jefe de Estado: gobierna en cuerpo el Consejo Federal, de siete miembros, y la presidencia rota cada año."
  },
  {
   "codigo": "SR",

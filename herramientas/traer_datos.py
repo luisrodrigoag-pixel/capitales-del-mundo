@@ -67,6 +67,12 @@ NOTAS = {
     "MM": "Naipyidó es la capital desde 2005; Rangún fue la anterior.",
     "CZ": "República Checa o Chequia; ambas son oficiales en español.",
 }
+NOTAS_JEFES = {
+    "BA": "La jefatura del Estado es una presidencia colegiada de tres miembros —bosniaco, croata y serbio— que se turnan la presidencia cada ocho meses. Aquí aparece uno de los tres.",
+    "SM": "San Marino tiene dos Capitanes Regentes que gobiernan juntos seis meses y se renuevan cada 1 de abril y cada 1 de octubre, así que este dato envejece rápido.",
+    "CH": "Suiza no tiene jefe de Estado: gobierna en cuerpo el Consejo Federal, de siete miembros, y la presidencia rota cada año.",
+    "AD": "Andorra tiene dos coprincipes, el obispo de Urgel y el presidente de Francia. Aquí aparece el episcopal.",
+}
 CONTINENTE = {"Africa": "África", "Americas": "América", "Asia": "Asia",
               "Europe": "Europa", "Oceania": "Oceanía"}
 REGION = {
@@ -79,6 +85,7 @@ REGION = {
     "South-Eastern Asia": "Sudeste asiático", "Northern Europe": "Europa del norte",
     "Western Europe": "Europa occidental", "Eastern Europe": "Europa del este",
     "Southern Europe": "Europa del sur", "Central Europe": "Europa central",
+    "Southeast Europe": "Europa del sureste", "Northern America": "Norteamérica",
     "Australia and New Zealand": "Australia y Nueva Zelanda", "Melanesia": "Melanesia",
     "Micronesia": "Micronesia", "Polynesia": "Polinesia",
 }
@@ -218,8 +225,8 @@ def main():
 
     moneda = {}
     for f in sparql('SELECT ?code ?monedaLabel ?iso WHERE { ?pais wdt:P297 ?code . ?pais p:P38 ?pm . '
-                    '?pm ps:P38 ?m . FILTER NOT EXISTS { ?pm pq:P582 ?fin } '
-                    'OPTIONAL { ?m wdt:P498 ?iso } '
+                    '?pm ps:P38 ?moneda . FILTER NOT EXISTS { ?pm pq:P582 ?fin } '
+                    'OPTIONAL { ?moneda wdt:P498 ?iso } '
                     'SERVICE wikibase:label { bd:serviceParam wikibase:language "es,en". } }'):
         c = val(f, "code")
         if c not in codigos:
@@ -410,6 +417,8 @@ def main():
             quien.pop("gobierno")
             quien["estado"]["unico"] = True
         reg["jefes"] = quien
+        if c in NOTAS_JEFES:
+            reg["nota_jefes"] = NOTAS_JEFES[c]
         salida.append(reg)
 
     salida.sort(key=lambda r: r["pais"])
